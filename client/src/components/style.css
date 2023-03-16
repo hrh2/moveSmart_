@@ -1,0 +1,52 @@
+form-controls {
+     border-top: none!important;
+     border-left: none;
+     border-right: none;
+     border-radius: 0;
+     border-bottom: 1px solid #ced4da;
+}
+.form-control:focus {
+     box-shadow: none;
+     border-color: #ced4da;
+}
+.leftdiv1{
+     background-image: url('./img/wave-haikei.svg');
+     border-top-left-radius: 0px !important;
+     border-bottom-left-radius:0px !important;
+}
+.leftdiv2 {
+     background-image: url('./img/simal.svg');
+     border-top-right-radius: 0px !important;
+     border-bottom-right-radius: 0px !important;
+}
+
+@media only screen and (max-width: 600px) {
+     .leftdiv {
+          display: none !important;
+     }
+     .rightdiv{
+          width:99% !important;
+     }
+     .leftdiv2{
+          display:none !important;
+     }
+}
+.btn1{
+     background-color: #053a58 !important;
+}
+.btn1:hover{
+     background-color: #053a58;
+}
+.lang{
+     color:white;
+}
+.lang:hover{
+     color:black !important;
+}
+.lang:active{
+     color:black;
+}
+.main{
+     background-image:url("./img/wave.svg");
+     background-size: cover;
+}
