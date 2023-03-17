@@ -30,23 +30,6 @@ form-controls {
      .leftdiv2{
           display:none !important;
      }
-     .stationsDiv{
-           width:100%!important;
-          display: block!important; 
-          /* margin: auto !important; */
-     }
-     .card-body{
-          max-height: 40vh !important;
-     }
-     .seachDiv{
-          max-height: 15vh;
-     }
-     .main2{
-          background-image: url("./img/wave.svg");
-               background-size: cover;
-               padding: 0;
-     }
-
 }
 .btn1{
      background-color: #053a58 !important;
@@ -66,23 +49,4 @@ form-controls {
 .main{
      background-image:url("./img/wave.svg");
      background-size: cover;
-}
-::-webkit-scrollbar {
-     width: 4px;
-     /* width of the scrollbar */
-}
-
-::-webkit-scrollbar-track {
-     background-color: #f1f1f1;
-     /* color of the track */
-}
-
-::-webkit-scrollbar-thumb {
-     background-color: #053a58;
-     /* color of the thumb */
-}
-
-::-webkit-scrollbar-thumb:hover {
-     background-color:#555;
-     /* color of the thumb on hover */
 }

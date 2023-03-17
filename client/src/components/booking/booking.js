@@ -20,85 +20,80 @@ function Booktickets() {
      }, []);
 
      return (
-         <div className='container-fluid main2'>
-               <div className='row'>
-                    <ul className="nav nav-tabs bg-aliceblue">
-                         <li className="nav-item">
-                              <a className="nav-link active text-yellow" aria-current="page" href="/goBook">Reload</a>
+         <div className='container-fluid row'>
+          <div className='row'>
+                    <ul class="nav nav-tabs">
+                         <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="/goBook">Reload</a>
                          </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href="/">Home</a>
+                         <li class="nav-item">
+                              <a class="nav-link" href="/">home</a>
                          </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href="rental">Car Rentals</a>
+                         <li class="nav-item">
+                              <a class="nav-link" href="rental">Car Rentals</a>
                          </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href='/aboutUs'>About Us</a>
+                         <li class="nav-item">
+                              <a class="nav-link " href='/aboutUs'>About us</a>
                          </li>
                     </ul>
-               </div>
+          </div>
           <div className='row justify-align-content-md-center p-4'>
-                    <div className='col col-lg-2'>
-                         <div className='row'>
-                              <h1 className="text-center fw-bold">Stations</h1>
-                              <form class="d-flex mt-3">
-                                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-                                   <button class="btn btn-warning btn-sm" type="submit">Search</button>
-                              </form>
-                         </div>
-                         <div class='row border p-1 mt-3 seachDiv' style={{ height: '55vh', overflowY: 'scroll' }} >
-                              <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                   <ul class="nav nav-pills flex-column w-100">
-                                        {stations.map((station) => (
-                                             <li key={station.name} className="nav-item d-block">
-                                                  <a class="nav-link fw-bold text-center" href={`#${station.name}`}> {station.name}</a>
-                                             </li>
-                                        ))}
-                                   </ul>
-                              </nav>
-                         </div>
-                    </div>
-
-                    <div className='col-8 stationsDiv'>
-                         <h3 className='m-3'>Your choice belong Here</h3>
-                         <div data-bs-spy="scroll"  data-bs-smooth-scroll="true" class="scrollspy-example bg-aliceblue p-3 rounded-2" tabindex="0">
-                              {stations.map((station) => (
-                                   <div key={station._id} id={`${station.name}`} className="card p-1 mb-2" >
-                                        <div className='card-header'>
-                                             <h3 style={{ color: '#053a58', }}>{station.name}<span style={{ color: 'blue',}}> /Location: {station.location}</span></h3>
-
-                                        </div>
+               <div className='col col-lg-2'>
+                <div className='row'>
+                    <h1>Stations</h1>
+               <form class="d-flex" role="search">
+                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
+                 <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+                </form>
+                </div> 
+                <div className='row border p-1'>
+                              <nav class="navbar navbar-dark bg-dark">
+                              <ul class="nav nav-pills">
+                                   {stations.map((station) => (
                                         <div>
-                                             <h4 style={{ color: 'aliceblue' }}>Destinations:</h4>
+                                             <li key={station.name} className="nav-item d-block ">
+                                                  <a class="navbar-brand fw-bold d-block" href={`#${station.name}`}> {station.name}</a>
+                                        </li>
+                                        
+                                        </div>
+                                       
+                                   ))}
+                              </ul>
+                     </nav>
+                </div>
+               </div>
+               <div className='col-6'>
+                         <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-light p-3 rounded-2" tabindex="0">
+                              {stations.map((station) => (
+                                   <div key={station._id} id={`${station.name}`} className="card p-1">
+                                        <h3>{station.name}<span> /Location: {station.location}</span></h3>
+                                        <div>
+                                             
+                                             <h4>Destinations:</h4>
                                              <div className="">
-                                                  <div class="card-body " style={{ height: '55vh', overflowY: 'scroll' }} >
+                                               <div>
                                                        {station.destination.map((dest) => (
-                                                            <div className='card m-1 p-1'>
-                                                                 <form key={dest._id} className="">
-                                                                      <h5>{dest.name}</h5>
-                                                                      <div>
-                                                                           {dest.cars.map((car) => (
-                                                                                <div class="form-check btn-btn-group-vertical">
-                                                                                     <label class="form-check-label" for="inlineRadio2">
-                                                                                          {car.name}<span style={{ color: 'gray' }}> :{car.time}</span>
-                                                                                     </label>
-                                                                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value={car.name}></input>
-                                                                                </div>
-                                                                           ))}
-                                                                      </div>
-                                                                      <button className="btn mt-3" type="submit" style={{ backgroundColor: '#053a58', color: 'white', fontWeight: 'bold', borderColor: 'transparent' }}>Book</button>
-                                                                 </form>
-                                                            </div>
-                                                       ))}
-                                                  </div>
+                                                            <form key={dest._id} className="">
+                                                                 <h5>{dest.name}</h5>
+                                                                 <div>
+                                                                      {dest.cars.map((car) => (
+                                                                           <div class="form-check btn-btn-group-vertical">
+                                                                                <label class="form-check-label" for="inlineRadio2">{car.name}<span> :{car.time}</span></label>
+                                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value={car.name}></input>
+                                                                           </div>
+                                                                      ))}
+                                                                 </div>
+                                                                 <input className='' type="submit" value="Book"></input>
+                                                            </form>
+                                                       ))}                                              
+                                              </div>
                                              </div>
                                         </div>
                                    </div>
-
                               ))}
                          </div>
                </div>
-               <div className='col bg-primary rounded'>
+               <div className='col'>
                     
                </div>
           </div>
