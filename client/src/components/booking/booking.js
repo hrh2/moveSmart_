@@ -1,7 +1,7 @@
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "../style.css"
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -20,7 +20,7 @@ function Booktickets() {
      }, []);
 
      return (
-         <div className='container-fluid main2'>
+          <div className='container-fluid main2'>
                <div className='row'>
                     <ul className="nav nav-tabs bg-aliceblue">
                          <li className="nav-item">
@@ -37,7 +37,7 @@ function Booktickets() {
                          </li>
                     </ul>
                </div>
-          <div className='row justify-align-content-md-center p-4'>
+               <div className='row justify-align-content-md-center p-4'>
                     <div className='col col-lg-2'>
                          <div className='row'>
                               <h1 className="text-center fw-bold">Stations</h1>
@@ -61,11 +61,11 @@ function Booktickets() {
 
                     <div className='col-8 stationsDiv'>
                          <h3 className='m-3'>Your choice belong Here</h3>
-                         <div data-bs-spy="scroll"  data-bs-smooth-scroll="true" class="scrollspy-example bg-aliceblue p-3 rounded-2" tabindex="0">
+                         <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example bg-aliceblue p-3 rounded-2" tabindex="0">
                               {stations.map((station) => (
                                    <div key={station._id} id={`${station.name}`} className="card p-1 mb-2" >
                                         <div className='card-header'>
-                                             <h3 style={{ color: '#053a58', }}>{station.name}<span style={{ color: 'blue',}}> /Location: {station.location}</span></h3>
+                                             <h3 style={{ color: '#053a58', }}>{station.name}<span style={{ color: 'blue', }}> /Location: {station.location}</span></h3>
 
                                         </div>
                                         <div>
@@ -97,12 +97,12 @@ function Booktickets() {
 
                               ))}
                          </div>
-               </div>
-               <div className='col bg-primary rounded'>
-                    
+                    </div>
+                    <div className='col bg-primary rounded'>
+
+                    </div>
                </div>
           </div>
-         </div>
      )
 }
 
