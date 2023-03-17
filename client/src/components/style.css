@@ -1,22 +1,19 @@
 form-controls {
-     border-top: none !important;
+     border-top: none!important;
      border-left: none;
      border-right: none;
      border-radius: 0;
      border-bottom: 1px solid #ced4da;
 }
-
 .form-control:focus {
      box-shadow: none;
      border-color: #ced4da;
 }
-
-.leftdiv1 {
+.leftdiv1{
      background-image: url('./img/wave-haikei.svg');
      border-top-left-radius: 0px !important;
-     border-bottom-left-radius: 0px !important;
+     border-bottom-left-radius:0px !important;
 }
-
 .leftdiv2 {
      background-image: url('./img/simal.svg');
      border-top-right-radius: 0px !important;
@@ -27,62 +24,49 @@ form-controls {
      .leftdiv {
           display: none !important;
      }
-
-     .rightdiv {
-          width: 99% !important;
+     .rightdiv{
+          width:99% !important;
      }
-
-     .leftdiv2 {
-          display: none !important;
+     .leftdiv2{
+          display:none !important;
      }
-
-     .stationsDiv {
-          width: 100% !important;
-          display: block !important;
+     .stationsDiv{
+           width:100%!important;
+          display: block!important; 
           /* margin: auto !important; */
      }
-
-     .card-body {
+     .card-body{
           max-height: 40vh !important;
      }
-
-     .seachDiv {
+     .seachDiv{
           max-height: 15vh;
      }
-
-     .main2 {
+     .main2{
           background-image: url("./img/wave.svg");
-          background-size: cover;
-          padding: 0;
+               background-size: cover;
+               padding: 0;
      }
 
 }
-
-.btn1 {
+.btn1{
      background-color: #053a58 !important;
 }
-
-.btn1:hover {
+.btn1:hover{
      background-color: #053a58;
 }
-
-.lang {
-     color: white;
+.lang{
+     color:white;
 }
-
-.lang:hover {
-     color: black !important;
+.lang:hover{
+     color:black !important;
 }
-
-.lang:active {
-     color: black;
+.lang:active{
+     color:black;
 }
-
-.main {
-     background-image: url("./img/wave.svg");
+.main{
+     background-image:url("./img/wave.svg");
      background-size: cover;
 }
-
 ::-webkit-scrollbar {
      width: 4px;
      /* width of the scrollbar */
@@ -99,6 +83,6 @@ form-controls {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-     background-color: #555;
+     background-color:#555;
      /* color of the thumb on hover */
 }
