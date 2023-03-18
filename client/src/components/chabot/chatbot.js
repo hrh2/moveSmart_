@@ -24,7 +24,7 @@ const Chatbot = () => {
           <div>
                <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid">
-                         <a className="navbar-brand" href="/home">Home</a>
+                         <a className="navbar-brand" href="/">Home</a>
                     </div>
                </nav>
 

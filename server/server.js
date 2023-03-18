@@ -18,9 +18,9 @@ const accountRoutes = require('./controller/account');
 const bookupdateRoutes = require('./controller/book');
 const chatbot=require('./controller/chatbot');
 
+app.use(bodyParser.json({ limit: '3mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '3mb' }));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 

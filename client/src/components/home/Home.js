@@ -1,19 +1,33 @@
 import React,{useState,useEffect} from 'react';
 import Axios from 'axios'
-import { Alert } from "react-bootstrap";
+import { Alert, Container, Row, Col, Image, Button } from "react-bootstrap";
 
 // import ReactDOM from 'react-dom';
 // import { Provider } from 'react-redux';
 import { CgProfile } from "react-icons/cg";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
-import { FaBusAlt } from "react-icons/fa";
+import { FaBusAlt, FaUser, FaPhone, FaEnvelope, FaCar, FaInfoCircle, FaShoppingBag } from "react-icons/fa";
 import { FcOvertime } from "react-icons/fc";
 import { RiUserLocationFill } from "react-icons/ri"; 
 import {TbMessageChatbot} from 'react-icons/tb';
 import nyanza from '../img/images.jpeg'
+import image from '../img/images.jpg'
 
 function Home(){
+     const [showProfile,setVisibility] = useState(false);
+     function handleClick(){
+          setVisibility(true)
+     }
+     function handleClose(){
+          setVisibility(false)
+     }
+     const [user,setuser] = useState({
+          username:'',
+          phone:'',
+          firstName:'',
+          lastName:'',
+     });
      const handleLogout = () => {
           localStorage.removeItem("token");
           window.location.reload();
@@ -22,6 +36,7 @@ function Home(){
      const [used, setUsed] = useState(0);
      const [balance, setBalance] = useState(0);
      const [error, setError] = useState('');
+     const [image,setImage]=useState(null);
 
      useEffect(() => {
           const fetchUserData = async () => {
@@ -32,9 +47,20 @@ function Home(){
                     }
                     Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
                     const response = await Axios.get('http://localhost:3005/api/account');
+                    console.log(response.data);
                     setMoney(response.data.account.money);
                     setBalance(response.data.account.balance);
-                    setUsed(response.data.account.used);  
+                    setUsed(response.data.account.used); 
+                    setuser({
+                         username:response.data.username,
+                         phone:response.data.phone,
+                         firstName:response.data.name[0],
+                         lastName:response.data.name[1],
+                         email:response.data.email,
+                    }); 
+                    setImage(response.data.image);
+                    console.log(image);
+                    console.log(user.image)
                } catch (error) {
                     console.error(error);
                     if (error.response && error.response.status >= 400 && error.response.status <= 500) {
@@ -69,13 +95,62 @@ function Home(){
              </div>
              <div className='container-xxl row m-2'>
                <div className='container-xxl col'>
-                         <button type="button" className="btn btn-primary position-relative">
-                              <CgProfile className='mx-5 shadow-sm rounded-5' size='2rem' />
-                              <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                                   <span className="visually-hidden">New alerts</span>
-                              </span>
-                         </button>
-                         <a href='/chatbot'><TbMessageChatbot size="3em"/></a>
+                       <div className='row'>
+                              <div className='col'>
+                                   <button type="button" className="btn btn-primary position-relative " onClick={handleClick}>
+                                        <CgProfile className='mx-5 shadow-sm rounded-5' size='2rem' />
+                                        <span className="position-absolute top-0 start-100 translate-middle p-2 bg-white border border-light rounded-circle">
+                                             <span className="visually-hidden">New alerts</span>
+                                        </span>
+                                   </button>
+                              </div>
+                              <div className='col'>
+                                   <a href='/chatbot'><TbMessageChatbot size="3em" /></a>
+                              </div>
+                       </div>
+                       <div className='row'>
+                              {showProfile && <div className='col-9'>
+                                   <Container className="my-3">
+                                        <Row>
+                                             <Col md={3}>
+                                                  <Image src={image} roundedCircle fluid />
+                                             </Col>
+                                             <Col md={9}>
+                                                  <h2>{user.username}</h2>
+                                                  <p className="mb-1"><FaPhone className="me-2" /> {user.phone}</p>
+                                                  <p className="mb-1"><FaEnvelope className="me-2" /> {user.email}</p>
+                                                  <p className="mb-3"><FaUser className="me-2" /> {user.firstName} {user.lastName}</p>
+                                                  <Button variant="primary">
+                                                       Update
+                                                  </Button>
+                                             </Col>
+                                             <button type="button " class="btn-close mx-5" aria-label="Close" onClick={handleClose}></button>
+                                        </Row>
+                                   </Container>
+                              </div>}
+                              <div className='col-3 rounded-5'>
+                                   <nav className="navbar p-2  navbar-light bg-light">
+                                        <ul className="navbar-nav mr-auto">
+                                             <li className="nav-item">
+                                                  <a href="/rentalcars" className="nav-link">
+                                                       <FaCar /> Rental Cars
+                                                  </a>
+                                             </li>
+                                             <li className="nav-item">
+                                                  <a href="/aboutus" className="nav-link">
+                                                       <FaInfoCircle /> About Us
+                                                  </a>
+                                             </li>
+                                             <li className="nav-item">
+                                                  <a href="/market" className="nav-link">
+                                                       <FaShoppingBag /> Market
+                                                  </a>
+                                             </li>
+                                        </ul>
+                                   </nav>
+                                   
+                              </div>
+                       </div>
                </div>
                     <div className='container-xxl col d-grid gap-2'>
                          <div className='row d-grid gap-2 shadow-sm'>
@@ -121,13 +196,7 @@ function Home(){
                          </div>
                          <div className='row'>
                               <div className='row'>
-                                   <div className='col'> </div>
-                                   <div className='col-5'>
-                                        <div className="mx-5 spinner-grow" role="status">
-                                             <span className="visually-hidden">Loading...</span>
-                                        </div>
-                                   </div>
-                                   <div className='col'></div>
+                                   
                               </div>
                               <span className='text-center fs-6'>SINGITA KWITONDA LODGE</span>
                               <span className='text-center'>Ruhengeri,RWANDA</span>
@@ -138,11 +207,11 @@ function Home(){
                          <div className="card-body p-1 ">
                              <div className='row'>
                               <span className='row '>Depature</span>
-                                   <span className="badge text-bg-secondary p-2">12:00</span>
+                                   <span className="bg-light text-bg-secondary p-2">12:00</span>
                              </div>
                              <div className='row'>
                                 <span className='row'>Arrival</span>
-                                   <span className="badge text-bg-secondary p-2">16:00</span>
+                                   <span className="bg-light text-bg-secondary p-2">16:00</span>
                              </div>
                          </div>
                     </div>

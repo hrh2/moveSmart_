@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
      phone: { type: Number, required: true },
      username: { type: String, required: true },
      password: { type: String, required: true },
+     image:{type:String,required:false},
      account: {
           money: { type: Number, default: 0 },
           dateUpdated: { type: Date, default: Date.now },
@@ -29,15 +30,17 @@ const userSchema = new mongoose.Schema({
 
 const User=mongoose.model('User',userSchema);
 
-const validate=(data)=>{
-     const schema=joi.object({
-          firstName:joi.string().required().label('FirstName'),
-          lastName: joi.string().required().label('last Name'),
+const validate = (data) => {
+     const schema = joi.object({
+          firstName: joi.string().required().label('First Name'),
+          lastName: joi.string().required().label('Last Name'),
           email: joi.string().email().required().label('Email'),
           phone: joi.number().required().label('Phone Number'),
           username: joi.string().required().label('Username'),
-          password: passwordComplexity().required().label('password'), 
-     })
-     return schema.validate(data)    
-}
+          password: passwordComplexity().required().label('Password'),
+          image: joi.allow(null).label('Image'),
+     });
+     return schema.validate(data);
+};
+
 module.exports={User,validate}
