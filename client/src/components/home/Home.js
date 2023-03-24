@@ -12,7 +12,7 @@ import { FcOvertime } from "react-icons/fc";
 import { RiUserLocationFill } from "react-icons/ri"; 
 import {TbMessageChatbot} from 'react-icons/tb';
 import nyanza from '../img/images.jpeg'
-import image from '../img/images.jpg'
+
 
 function Home(){
      const [showProfile,setVisibility] = useState(false);

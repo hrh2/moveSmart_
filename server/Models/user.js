@@ -18,11 +18,11 @@ const userSchema = new mongoose.Schema({
           used: { type: Number, default: 0 },
           balance: { type: Number, dateOnly: true, default: 0 },
      },
-     lastTask: {
+     lastTask: [{
           destination: { type: String, default: "" },
           departed: { type: String, default: "" },
           date: { type: Date, dateOnly: true,default: Date.now },
-     },
+     }]
 });
 
 

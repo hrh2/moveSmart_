@@ -165,9 +165,10 @@ const Signup = () => {
                                         required
                                    />
                               </Form.Group>
-                              <div className="">
-                                   <input type="file" accept="image/" onChange={convertToBase64} /> 
-                              </div>        
+                              <div class="mb-3">
+                                   <label for="profile-pic" class="form-label">Your Profile Picture</label>
+                                   <input class="form-control" type="file" accept="image/" id="profile-pic" onChange={convertToBase64}></input>
+                              </div>
                               <div class="btn-group mt-3" role="group" aria-label="Basic example">
                                    <button variant="primary" type="submit" class="btn btn-primary">Sign Up</button>
                                    <button variant="secondary" type="reset" class="btn btn-outline-secondary">reset</button>

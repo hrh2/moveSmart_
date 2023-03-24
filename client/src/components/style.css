@@ -13,6 +13,7 @@ form-controls {
      background-image: url('./img/wave-haikei.svg');
      border-top-left-radius: 0px !important;
      border-bottom-left-radius:0px !important;
+     min-height:100vh;
 }
 .leftdiv2 {
      background-image: url('./img/simal.svg');

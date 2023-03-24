@@ -15,6 +15,7 @@ const stationsSchema = new mongoose.Schema({
           cars: [{ name: { type: String, required: true },
                   time: { type: Date, timeOnly: true, default: Date.now },
                   size: { type: Number, default: 0 } },],
+          cost: { type: Number, default: 0 ,required: true } 
      }]
 });
 
