@@ -19,8 +19,9 @@ const userSchema = new mongoose.Schema({
           balance: { type: Number, dateOnly: true, default: 0 },
      },
      lastTask: [{
-          destination: { type: String, default: "" },
-          departed: { type: String, default: "" },
+          destination: { type: String, required:false},
+          departed: { type: String, required: false },
+          car: { type: String, required: false },
           date: { type: Date, dateOnly: true,default: Date.now },
      }]
 });

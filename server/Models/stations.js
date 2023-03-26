@@ -1,4 +1,4 @@
-const { date } = require('joi');
+const { date, string } = require('joi');
 const mongoose = require('mongoose');
 
 const stationsSchema = new mongoose.Schema({
@@ -13,7 +13,7 @@ const stationsSchema = new mongoose.Schema({
      destination: [{
           name:{type: String, required: true},
           cars: [{ name: { type: String, required: true },
-                  time: { type: Date, timeOnly: true, default: Date.now },
+                  time: { type:String, required: false},
                   size: { type: Number, default: 0 } },],
           cost: { type: Number, default: 0 ,required: true } 
      }]

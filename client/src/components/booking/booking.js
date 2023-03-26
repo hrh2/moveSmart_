@@ -2,7 +2,8 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "../style.css"
 import React,{useEffect,useState} from "react";
-import axios from "axios";
+import Axios from "axios";
+import { FaChair } from 'react-icons/fa'
 
 
 function Booktickets() {
@@ -11,13 +12,38 @@ function Booktickets() {
 
      useEffect(() => {
           const fetchStations = async () => {
-               const response = await axios.get('http://localhost:3005/api/book');
+               const token = localStorage.getItem('token');
+               if (!token) {
+                    throw new Error('No token found');
+               }
+               const headers = { Authorization: `Bearer ${token}` };
+               const response = await Axios.get('http://localhost:3005/api/book', { headers });
                setStations(response.data);
-               console.log(response)
+               console.log(response);
           };
 
           fetchStations();
      }, []);
+
+     const handleBookClick = async (e, stationName, destName, carName) => {
+          e.preventDefault();
+          const token = localStorage.getItem('token');
+          if (!token) {
+               throw new Error('No token found');
+          }
+          const headers = { Authorization: `Bearer ${token}` };
+          console.log(token);
+          try {
+               const response = await Axios.post('http://localhost:3005/api/bookSpace', {
+                    stationName,
+                    destName,
+                    carName
+               }, { headers });
+               window.location.reload();
+          } catch (error) {
+               console.log(error);
+          }
+     };
 
      return (
          <div className='container-fluid main2'>
@@ -61,11 +87,11 @@ function Booktickets() {
 
                     <div className='col-8 stationsDiv'>
                          <h3 className='m-3'>Your choice belong Here</h3>
-                         <div data-bs-spy="scroll"  data-bs-smooth-scroll="true" class="scrollspy-example bg-aliceblue p-3 rounded-2" tabindex="0">
+                         <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example bg-aliceblue p-3 rounded-2" tabindex="0">
                               {stations.map((station) => (
                                    <div key={station._id} id={`${station.name}`} className="card p-1 mb-2" >
                                         <div className='card-header'>
-                                             <h3 style={{ color: '#053a58', }}>{station.name}<span style={{ color: 'blue',}}> /Location: {station.location}</span></h3>
+                                             <h3 style={{ color: '#053a58', }}>{station.name}<span style={{ color: 'blue', }}> /Location: {station.location}</span></h3>
 
                                         </div>
                                         <div>
@@ -74,16 +100,32 @@ function Booktickets() {
                                                   <div class="card-body " style={{ height: '55vh', overflowY: 'scroll' }} >
                                                        {station.destination.map((dest) => (
                                                             <div className='card m-1 p-1'>
-                                                                 <form key={dest._id} className="">
+                                                                 <form key={dest._id} onSubmit={(e) => handleBookClick(e, station.name, dest.name, document.querySelector(`input[name="${dest.name}"]:checked`).value)}>
                                                                       <h5>{dest.name}</h5>
                                                                       <div>
                                                                            {dest.cars.map((car) => (
-                                                                                <div class="form-check btn-btn-group-vertical">
-                                                                                     <label class="form-check-label" for="inlineRadio2">
-                                                                                          {car.name}<span style={{ color: 'gray' }}> :{car.time}</span>
-                                                                                     </label>
-                                                                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value={car.name}></input>
+                                                                                <div class="d-flex align-items-center mb-3">
+                                                                                     <div class="col-6">
+                                                                                          <div class="form-check">
+                                                                                               <input class="form-check-input" type="radio" name={dest.name} value={car.name} id={`radio-${car.name}`} />
+                                                                                               <label class="form-check-label ml-2" for={`radio-${car.name}`}>
+                                                                                                    {car.name}<span style={{ color: 'gray' }}> :{car.time}</span>
+                                                                                               </label>
+                                                                                          </div>
+                                                                                     </div>
+                                                                                     <div class="col-6">
+                                                                                          <div class="d-flex justify-content-end">
+                                                                                               <div class="border rounded p-2">
+                                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                                         <span>{car.size}</span>
+                                                                                                         <div class="border-left mx-2"></div>
+                                                                                                         <span><FaChair size='2em' /></span>
+                                                                                                    </div>
+                                                                                               </div>
+                                                                                          </div>
+                                                                                     </div>
                                                                                 </div>
+
                                                                            ))}
                                                                       </div>
                                                                       <button className="btn mt-3" type="submit" style={{ backgroundColor: '#053a58', color: 'white', fontWeight: 'bold', borderColor: 'transparent' }}>Book</button>
@@ -97,7 +139,7 @@ function Booktickets() {
 
                               ))}
                          </div>
-               </div>
+                    </div>
                <div className='col bg-primary rounded'>
                     
                </div>
