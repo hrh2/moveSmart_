@@ -1,5 +1,5 @@
 import React,{ useState } from "react";
-import { Form, Alert } from "react-bootstrap";
+import { Form, Alert,Image } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import { TbLanguage } from "react-icons/tb"
 import Axios from "axios";
@@ -15,8 +15,9 @@ const Signup = () => {
           phone:null,
           username: '',
           password: '',
-         // image:null
+          image:null
      });
+     const [image,setImage]=useState(null)
     
      const [error, setError] = useState('');
      const handleChange = ({ currentTarget: input }) => {
@@ -26,9 +27,11 @@ const Signup = () => {
      const handleSubmit = async (e) => {
           e.preventDefault();
           try {
-               const response = await Axios.post('http://localhost:3005/api/user',data);
-               console.log(response.data);
-               console.log(data);
+               const response = await Axios.post('http://localhost:3005/api/user', data);
+               const token = response.data.token;
+               localStorage.setItem('token', token);
+               Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+               window.location = "/";
           } catch (error) {
                console.error(error);
                if (
@@ -41,6 +44,19 @@ const Signup = () => {
           }
      };
 
+
+     function convertToBase64(file) {
+          let reader = new FileReader();
+          reader.readAsDataURL(file.target.files[0]);
+          reader.onload = (result) => {
+               console.log(reader.result);
+               setData({ ...data,image:reader.result});
+               setImage(reader.result); 
+          }
+          reader.onerror = () => { console.log(reader.result); }
+     }
+
+
      const handleReset = () => {
           setData({
                firstName: '',
@@ -49,9 +65,11 @@ const Signup = () => {
                phone: null,
                username: '',
                password: '',
+               image: null
           });
-         
+          setImage(null)
      };
+
 
      
 
@@ -76,6 +94,9 @@ const Signup = () => {
                     <div className="p-5 text-center">
                          <h1>Sign Up</h1>
                          {error && <Alert variant="danger">{error}</Alert>}
+                         <div class="">
+                                        {image === "" || image === null ? "" : <Image src={image} width={100} height={100} roundedCircle fluid />} 
+                                   </div>
                          <Form onSubmit={handleSubmit} onReset={handleReset}>
                               <Form.Group controlId="firstName">
 
@@ -144,7 +165,10 @@ const Signup = () => {
                                         required
                                    />
                               </Form.Group>
-                              
+                              <div class="mb-3">
+                                   <label for="profile-pic" class="form-label">Your Profile Picture</label>
+                                   <input class="form-control" type="file" accept="image/" id="profile-pic" onChange={convertToBase64}></input>
+                              </div>
                               <div class="btn-group mt-3" role="group" aria-label="Basic example">
                                    <button variant="primary" type="submit" class="btn btn-primary">Sign Up</button>
                                    <button variant="secondary" type="reset" class="btn btn-outline-secondary">reset</button>

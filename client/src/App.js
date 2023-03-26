@@ -6,6 +6,7 @@ import Home from './components/home/Home';
 import BookTickets from './components/booking/booking';
 import Chatbot from './components/chabot/chatbot';
 
+
 function App() {
   const user = localStorage.getItem("token");
   return (
