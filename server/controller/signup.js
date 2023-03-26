@@ -1,41 +1,46 @@
-const router=require('express').Router();
-const {User,validate}=require('../Models/user');
-const bcrypt=require('bcrypt');
+const router = require('express').Router();
+const { User, validate } = require('../Models/user');
+const bcrypt = require('bcrypt');
 
-router.post('/',async (req,res)=>{
-     try{
-          const {error}=validate(req.body);
-                 if(error)
-                 return res.status(400).json({error:error.details[0].message})
-          const user=await User.findOne({email:req.body.email});
-             if(user)
-                res.status(400).json({error:'User already exists'})
-         const salt=await bcrypt.genSalt(10);
-         const hash=await bcrypt.hash(req.body.password,salt);
-             await new User({
+router.post('/', async (req, res) => {
+     try {
+          const { error } = validate(req.body);
+          if (error) {
+               return res.status(400).json({ error: error.details[0].message });
+          }
+          const Euser = await User.findOne({ email: req.body.email });
+          if (Euser) {
+               return res.status(400).json({ error: 'User already exists' });
+          }
+          const salt = await bcrypt.genSalt(10);
+          const hash = await bcrypt.hash(req.body.password, salt);
+          const user = new User({
                firstName: req.body.firstName,
                lastName: req.body.lastName,
                email: req.body.email,
                phone: req.body.phone,
                username: req.body.username,
                password: hash,
+               image: req.body.image,
                account: {
                     money: 0,
-                    dateUpdated:Date.now(),
+                    dateUpdated: Date.now(),
                     used: 0,
                     balance: 0,
                },
                lastTask: {
-                    destination: "",
-                    departed: "",
+                    destination: '',
+                    departed: '',
                     date: Date.now(),
                },
-          }).save();
-
-     res.status(201).json({message:'Your have successfully created Account'})       
-     }catch(error){
-     res.status(500).json({message:'Internal Server error',error:error.message})
+          });
+          await user.save();
+          const token = jwt.sign({ _id: user._id, email: user.email, phone: user.phone }, process.env.JWT);
+          res.status(200).send({ token: token });
+     } catch (error) {
+          console.error(error.message);
+          res.status(500).json({ message: 'Internal Server error' });
      }
-})
+});
 
-module.exports=router;
+module.exports = router;

@@ -24,13 +24,13 @@ const Chatbot = () => {
           <div>
                <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid">
-                         <a className="navbar-brand" href="/home">Home</a>
+                         <a className="navbar-brand" href="/">Home</a>
                     </div>
                </nav>
 
                <div className="container mt-5">
                     <div className="row justify-content-center">
-                         <div className="col-md-6 col-lg-4">
+                         <div className="col">
                               <div className="card">
                                    <div className="card-header bg-primary text-white">
                                         Chatbot
@@ -39,13 +39,20 @@ const Chatbot = () => {
                                         <div className="form-group">
                                              <label htmlFor="message">Message:</label>
                                              <div className="input-group mb-3">
-                                                  <input
+                                                  {/* <input
                                                        type="text"
                                                        className="form-control"
                                                        placeholder="Enter your message"
                                                        value={message}
                                                        onChange={(e) => setMessage(e.target.value)}
-                                                  />
+                                                  /> */}
+                                                  <textarea 
+                                                       className="form-control"
+                                                       placeholder="Enter your message"
+                                                       value={message}
+                                                       onChange={(e) => setMessage(e.target.value)}>
+
+                                                  </textarea>
                                                   <div className="input-group-append">
                                                        <button
                                                             className="btn btn-primary m-2"
@@ -67,7 +74,7 @@ const Chatbot = () => {
                                         <div className="form-group">
                                              <label htmlFor="response">Response:</label>
                                              <div className="card">
-                                                  <div className="card-body">
+                                                  <div className="container">
                                                        {response}
                                                   </div>
                                              </div>
