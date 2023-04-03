@@ -3,6 +3,7 @@ const router = express.Router();
 const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
 const { User } = require('../Models/user')
 const Station = require('../Models/stations')
+const {Qrcode}=require('../Models/qrCodes')
 
 router.post('/',verifyToken,async (req, res) => {
      const { stationName, destName, carName } = req.body;
@@ -13,12 +14,9 @@ router.post('/',verifyToken,async (req, res) => {
           const user = await User.findOne({ _id: userId })
           user.account.balance=(user.account.money-destination.cost)
           user.account.used = (user.account.used + destination.cost)
-          user.lastTask.push({destination:stationName,departed:destName,car:carName,date:Date.now()})
+          user.lastTask.push({destination:stationName,departed:destName,cost:destination.cost,car:carName,date:Date.now()})
           const car = destination.cars.find(car => car.name ==carName);
           car.size--;
-          
-          
-
           await station.save();
           await user.save();
           console.log('all done')

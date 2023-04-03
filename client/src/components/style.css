@@ -1,3 +1,35 @@
+::-webkit-scrollbar {
+     width: 4px !important;
+     border-radius:15%;
+     /* width of the scrollbar */
+}
+::-webkit-scrollbar:hover {
+     width: 10px !important;
+     /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+      border-radius:15%;
+     background-color: #d4d7d6 !important;
+     /* color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+      border-radius:15%;
+     background-color: #053a58 !important;
+     /* color of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+     background-color: #c3eaf3 !important;
+     /* color of the thumb on hover */
+}
+
+.mainBar{
+     height:8vh;
+}
+
+
 form-controls {
      border-top: none!important;
      border-left: none;
@@ -20,34 +52,18 @@ form-controls {
      border-top-right-radius: 0px !important;
      border-bottom-right-radius: 0px !important;
 }
-
-@media only screen and (max-width: 600px) {
-     .leftdiv {
-          display: none !important;
-     }
-     .rightdiv{
-          width:99% !important;
-     }
-     .leftdiv2{
-          display:none !important;
-     }
-     .stationsDiv{
-           width:100%!important;
-          display: block!important; 
-          /* margin: auto !important; */
-     }
-     .card-body{
-          max-height: 40vh !important;
-     }
-     .seachDiv{
-          max-height: 15vh;
-     }
-     .main2{
-          background-image: url("./img/wave.svg");
-               background-size: cover;
-               padding: 0
-     }
-
+.ticketsDiv{
+     height: 40vh;
+     background-color: #555;
+     width: 93%;
+     overflow-y: scroll;
+}
+.Ticket{
+     width: 24%!important;
+}
+.TaskList{
+     height: 64vh !important;
+     overflow-y:scroll; 
 }
 .btn1{
      background-color: #053a58 !important;
@@ -68,22 +84,50 @@ form-controls {
      background-image:url("./img/wave.svg");
      background-size: cover;
 }
-::-webkit-scrollbar {
-     width: 4px;
-     /* width of the scrollbar */
+
+.shoppingImg{
+     width: 30%!important;
+    
+}
+.rentingCars{
+     width: 50%!important;
 }
 
-::-webkit-scrollbar-track {
-     background-color: #f1f1f1;
-     /* color of the track */
-}
+@media only screen and (max-width: 650px) {
+     .leftdiv {
+          display: none !important;
+     }
 
-::-webkit-scrollbar-thumb {
-     background-color: #053a58;
-     /* color of the thumb */
-}
+     .rightdiv {
+          width: 99% !important;
+     }
 
-::-webkit-scrollbar-thumb:hover {
-     background-color:#555;
-     /* color of the thumb on hover */
+     .leftdiv2 {
+          display: none !important;
+     }
+
+     .stationsDiv {
+          width: 100% !important;
+          display: block !important;
+     }
+
+     .card-body {
+          max-height: 40vh !important;
+     }
+
+     .seachDiv {
+          max-height: 15vh;
+     }
+
+     .main2 {
+          background-image: url("./img/wave.svg");
+          background-size: cover;
+          padding: 0
+     }
+
+     .Accountdiv {
+          width: 100vw;
+          display: block !important;
+     }
+
 }

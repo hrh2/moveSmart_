@@ -14,8 +14,6 @@ const openai = new OpenAIApi(configuration);
 router.post('/', async (req, res) => {
      // Extract the prompt from the request body
      const {message}= req.body;
-     console.log(message);
-
      // Call the OpenAI API to generate a response
      const completion = await openai.createCompletion({
           model: 'text-davinci-002', // specify the model to use

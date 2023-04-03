@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
+const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
 // const { User } = require('../Models/user')
 const Station=require('../Models/stations')
 
@@ -8,7 +8,6 @@ const Station=require('../Models/stations')
 router.get('/', async (req, res) => {
      try {
           const stations = await Station.find();
-          
           res.json(stations);
      } catch (err) {
           console.error(err);
@@ -16,22 +15,35 @@ router.get('/', async (req, res) => {
      }
 });
 
-router.post('/', async (req, res) => {
-     console.log(req.body);
+router.post('/',verifyToken,async (req, res) => {
      const { name, location, destination } = req.body;
-
      try {
-          const newStation = new Station({
-               Name: name,
-               location: location,
-               destination: destination
-          });
-
-          await newStation.save();
-          res.json(newStation);
+          const station = await Station.findOne({ name })
+          if (station) {
+               const destinations = station.destination.find(dest => dest.name == destination.name);
+               if (destinations){
+                      for (let i = 0; i < destination.cars.length; i++) {
+                         let car = destinations.cars.find(car => car.name == destination.cars[i].name);
+                            if (car) {
+                              continue;
+                            }else{
+                              destinations.cars.push(destination.cars[i])
+                              }
+                         }
+                      await station.save()
+                      res.status(200).send({ message: `Some cars  have been added successfully in ${destination} the current state is ${station}` })
+                     }else{
+               station.destination.push(destination);
+               await station.save()
+               res.status(200).send({ message: `the destinations in ${station.name} is updated` })
+               }
+          }else{
+           const newStation = new Station({name,location,destination:[destination]});
+           await newStation.save();
+           res.json(newStation);
+          }
      } catch (err) {
-          console.error(err);
-          res.status(500).send('Server error');
+          res.status(500).send('Server error'+err.message);
      }
 });
 
@@ -42,7 +54,7 @@ router.put('/:id', async (req, res) => {
      try {
           const updatedStation = await Station.findOneAndUpdate(
                { _id: req.params.id },
-               { Name: name, location: location, destination: destination },
+               {name, location,destination },
                { new: true }
           );
 

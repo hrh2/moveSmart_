@@ -21,8 +21,11 @@ const userSchema = new mongoose.Schema({
      lastTask: [{
           destination: { type: String, required:false},
           departed: { type: String, required: false },
+          cost: { type: Number, required:false},
           car: { type: String, required: false },
-          date: { type: Date, dateOnly: true,default: Date.now },
+          date: { type: Date,default: Date.now },
+          isTicket: { type: Boolean, default:false,required:false},
+          qrCode:{type:String, required:false},
      }]
 });
 
@@ -40,6 +43,7 @@ const validate = (data) => {
           username: joi.string().required().label('Username'),
           password: passwordComplexity().required().label('Password'),
           image: joi.allow(null).label('Image'),
+
      });
      return schema.validate(data);
 };

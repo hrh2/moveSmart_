@@ -47,21 +47,34 @@ function Booktickets() {
 
      return (
          <div className='container-fluid main2'>
-               <div className='row'>
-                    <ul className="nav nav-tabs bg-aliceblue">
-                         <li className="nav-item">
-                              <a className="nav-link active text-yellow" aria-current="page" href="/goBook">Reload</a>
-                         </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href="/">Home</a>
-                         </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href="rental">Car Rentals</a>
-                         </li>
-                         <li className="nav-item">
-                              <a className="nav-link text-blue" href='/aboutUs'>About Us</a>
-                         </li>
-                    </ul>
+               <div className='bg-primary container-fluid mx-1 p-1 rounded row'>
+                    <div className='row '>
+                         <div className='col container'>
+                              <h1 className='h3 bold '>Smart<span className='h3 fw-bold text-warning'>MOVE</span></h1>
+                         </div>
+                         <div className='col container'>
+                              {/* {error && <Alert variant="danger">{error}</Alert>} */}
+                         </div>
+                         <div className='col-6 container'>
+                              <ul className="nav nav-tabs bg-light rounded">
+                                   <li className="nav-item">
+                                        <a className="nav-link active text-yellow" aria-current="page" href="/goBook">Reload</a>
+                                   </li>
+                                   <li className="nav-item">
+                                        <a className="nav-link text-blue fw-bold" href="/">Home</a>
+                                   </li>
+                                   <li className="nav-item">
+                                        <a className="nav-link text-blue fw-bold" href="rental">Car Rentals</a>
+                                   </li>
+                                   <li className="nav-item">
+                                        <a className="nav-link text-blue fw-bold" href='/aboutUs'>About Us</a>
+                                   </li>
+                              </ul>
+                         </div>
+                         <div className='col container'>
+                            
+                         </div>
+                    </div>
                </div>
           <div className='row justify-align-content-md-center p-4'>
                     <div className='col col-lg-2'>

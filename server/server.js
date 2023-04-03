@@ -18,6 +18,7 @@ const accountRoutes = require('./controller/account');
 const stationUpdateRoutes = require('./controller/stations');
 const chatbot=require('./controller/chatbot');
 const bookings = require('./controller/booking');
+const records=require('./controller/records');
 
 
 app.use(bodyParser.json({ limit: '3mb' }));
@@ -34,6 +35,7 @@ app.use('/api',accountRoutes);
 app.use('/api/book',stationUpdateRoutes);
 app.use('/api/chatbot',chatbot)
 app.use('/api/bookSpace',bookings);
+app.use('/api/records',records);
 
 
 

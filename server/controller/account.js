@@ -15,7 +15,7 @@ router.get('/account', verifyToken, async (req, res) => {
           // const base64Image = image.toString('base64');
           res.json({ account: account, lastTask: lastTask, username, phone, email, name: [firstName, lastName], image });
      } catch (err) {
-          console.error(err.message+"\n this is the errror");
+          console.error(err.message + "\n this is the errror");
           if (!res.headersSent) {
                res.status(500).send('Server Error');
           }
