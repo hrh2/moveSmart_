@@ -62,11 +62,11 @@ function MyForm() {
                <div className="form-row align-items-center container">
                     <h2 className='text-decoration-underline'>Your Journey</h2>
                     <div className="input-group my-3">
-                         <input type="text" className="form-control border-end-0 p-3" aria-label="from" placeholder="from" value={from} onChange={handleInputChangeFrom} />
+                         <input type="text" className="form-control border-end-0 p-3" aria-label="from" placeholder="from" value={from} onChange={handleInputChangeFrom} required/>
                          <button type="button" className="input-group-text border-end-0 border-start-0 px-2 bg-white" onClick={handleReverse}>
                               <span className='Exchange-btn'><CgArrowsExchange size="3em" /></span>
                          </button>
-                         <input type="text" className="form-control border-start-0 p-3" aria-label="Server" placeholder="to" value={to} onChange={handleInputChangeTo} />
+                         <input type="text" className="form-control border-start-0 p-3" aria-label="Server" placeholder="to" value={to} onChange={handleInputChangeTo} required/>
                          <button type="button" className="btn btn-danger" onClick={clearInputs}>Clear</button>
                     </div>
                     <div className="row">

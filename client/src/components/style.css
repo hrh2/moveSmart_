@@ -1,5 +1,4 @@
 *{
-     color:#02007A;
      padding: 0;
      margin: 0;
 }
@@ -78,4 +77,10 @@
 }
 .history-h1{
      border-left:.2em solid #010023;
+}
+.fst-italic-p{
+     color: rgb(105, 99, 99)!important;
+}
+.icon1{
+     color:grey!important;
 }
