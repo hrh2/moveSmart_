@@ -1,3 +1,8 @@
+*{
+     color:#02007A;
+     padding: 0;
+     margin: 0;
+}
 ::-webkit-scrollbar {
      width: 4px !important;
      border-radius:15%;
@@ -24,110 +29,50 @@
      background-color: #c3eaf3 !important;
      /* color of the thumb on hover */
 }
-
-.mainBar{
-     height:8vh;
+.SideBar_container ,.Content_container{
+     padding: 0 !important;
+     margin: 0 !important;
 }
-
-
-form-controls {
-     border-top: none!important;
-     border-left: none;
-     border-right: none;
-     border-radius: 0;
-     border-bottom: 1px solid #ced4da;
+.sidebar {
+     width: 100% !important;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: #010023!important;
 }
-.form-control:focus {
-     box-shadow: none;
-     border-color: #ced4da;
+.sidebar hr{
+     color: #02007A;
+     border-top:3px solid #02007A;
 }
-.leftdiv1{
-     background-image: url('./img/wave-haikei.svg');
-     border-top-left-radius: 0px !important;
-     border-bottom-left-radius:0px !important;
-     min-height:100vh;
+.sidebar a{
+     border-radius:3em;
+     width: 80%;
 }
-.leftdiv2 {
-     background-image: url('./img/simal.svg');
-     border-top-right-radius: 0px !important;
-     border-bottom-right-radius: 0px !important;
+.sidebar a:hover{
+   background-color:#06389A;
 }
-.ticketsDiv{
-     height: 40vh;
-     background-color: #555;
-     width: 93%;
-     overflow-y: scroll;
+.siidebar a.active{
+  background-color: #06389A;
 }
-.Ticket{
-     width: 24%!important;
+.nav-tabs,.nav-tabs a{
+ font-size:1.1em;
+ background-color: #010023;
+ color:#02007A!important;
 }
-.TaskList{
-     height: 64vh !important;
-     overflow-y:scroll; 
+.nav-tabs a{
+ padding:1em 3em !important;
 }
-.btn1{
-     background-color: #053a58 !important;
+.book-a{
+     border-top-left-radius: 0px!important;
 }
-.btn1:hover{
-     background-color: #053a58;
+.Exchange-btn{
+     border:2px solid #010023;
+     border-radius: 50em;
+     box-shadow: .1em .1em .1em #010023;
 }
-.lang{
-     color:white;
-}
-.lang:hover{
-     color:black !important;
-}
-.lang:active{
-     color:black;
-}
-.main{
-     background-image:url("./img/wave.svg");
-     background-size: cover;
-}
-
-.shoppingImg{
-     width: 30%!important;
-    
-}
-.rentingCars{
-     width: 50%!important;
-}
-
-@media only screen and (max-width: 650px) {
-     .leftdiv {
-          display: none !important;
-     }
-
-     .rightdiv {
-          width: 99% !important;
-     }
-
-     .leftdiv2 {
-          display: none !important;
-     }
-
-     .stationsDiv {
-          width: 100% !important;
-          display: block !important;
-     }
-
-     .card-body {
-          max-height: 40vh !important;
-     }
-
-     .seachDiv {
-          max-height: 15vh;
-     }
-
-     .main2 {
-          background-image: url("./img/wave.svg");
-          background-size: cover;
-          padding: 0
-     }
-
-     .Accountdiv {
-          width: 100vw;
-          display: block !important;
-     }
-
+.book-btn{
+     border-radius: 25em!important;
+     background: #010023!important;
+     color: aliceblue;
 }
