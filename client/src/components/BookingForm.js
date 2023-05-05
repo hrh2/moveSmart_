@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
+import Axios from 'axios'
 import { CgArrowsExchange } from 'react-icons/cg';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 import { FaRegClock,FaUsers} from 'react-icons/fa';
 
 
 function MyForm() {
-     const stations = [{ id: 1, name: "Kigali" }, { id: 2, name: "Musanze" }, { id: 3, name: "Rubavu" }, { id: 4, name: "Nyungwe" }, { id: 5, name: "Akagera" }];
-     const [from, setFrom] = useState("");
-     const [to, setTo] = useState("");
+    // const stations = [{ id: 1, name: "Kigali" }, { id: 2, name: "Musanze" }, { id: 3, name: "Rubavu" }, { id: 4, name: "Nyungwe" }, { id: 5, name: "Akagera" }];
+     const [stations,setStations]=useState([]);
+     const [from, setFrom] = useState({});
+     const [to, setTo] = useState({});
      const [searchTermFrom, setSearchTermFrom] = useState("");
      const [searchTermTo, setSearchTermTo] = useState("");
      const [selectedStationFrom, setSelectedStationFrom] = useState("");
@@ -31,13 +33,13 @@ function MyForm() {
 
      const handleSelectOptionFrom = (station) => {
           setSelectedStationFrom(station);
-          setFrom(station.name);
+          setFrom(station);
           setSearchTermFrom(station.name);
           setShowDropdownFrom(false);
      };
      const handleSelectOptionTo = (station) => {
           setSelectedStationTo(station);
-          setTo(station.name);
+          setTo(station);
           setSearchTermTo(station.name);
           setShowDropdownTo(false);
      };
@@ -57,24 +59,37 @@ function MyForm() {
           setShowDropdownFrom(false);
           setShowDropdownTo(false);
      };
+     useEffect(()=>{
+          const fetchData= async()=>{
+               const serverData = await Axios.get('http://localhost:3005/api/book');
+               setStations(serverData.data)
+          }
+          fetchData()
+     })
      return (
           <form className="py-lg-5">
                <div className="form-row align-items-center container">
                     <h2 className='text-decoration-underline'>Your Journey</h2>
                     <div className="input-group my-3">
-                         <input type="text" className="form-control border-end-0 p-3" aria-label="from" placeholder="from" value={from} onChange={handleInputChangeFrom} required/>
+                         <input type="text" className="form-control border-end-0 p-3" aria-label="from" placeholder="from" value={from.name} onChange={handleInputChangeFrom} required/>
                          <button type="button" className="input-group-text border-end-0 border-start-0 px-2 bg-white" onClick={handleReverse}>
                               <span className='Exchange-btn'><CgArrowsExchange size="3em" /></span>
                          </button>
-                         <input type="text" className="form-control border-start-0 p-3" aria-label="Server" placeholder="to" value={to} onChange={handleInputChangeTo} required/>
+                         <input type="text" className="form-control border-start-0 p-3" aria-label="Server" placeholder="to" value={to.name} onChange={handleInputChangeTo} required/>
                          <button type="button" className="btn btn-danger" onClick={clearInputs}>Clear</button>
                     </div>
                     <div className="row">
                          <div className="col">
-                              {showDropdownFrom && <ul className="list-group dropdown-menu border-0 rounded-0">{matchingStationsFrom.map(station => <li key={station.id} className="list-group-item border-end-0 border-start-0 rounded-0" onClick={() => handleSelectOptionFrom(station)}>{station.name}</li>)}</ul>}
+                              {showDropdownFrom && <ul className="list-group dropdown-menu border-0 rounded-0">
+                                   {matchingStationsFrom.map(station => <li key={station.id} className="list-group-item border-end-0 border-start-0 rounded-0" 
+                                        onClick={() => handleSelectOptionFrom(station)}>
+                                             {station.name}</li>)}</ul>}
                          </div>
                          <div className="col">
-                              {showDropdownTo && <ul className="list-group dropdown-menu border-0 rounded-0">{matchingStationsTo.map(station => <li key={station.id} className="list-group-item border-end-0 border-start-0 rounded-0" onClick={() => handleSelectOptionTo(station)}>{station.name}</li>)}</ul>}
+                              {showDropdownTo && <ul className="list-group dropdown-menu border-0 rounded-0">
+                                   {matchingStationsTo.map(station => <li key={station.id} className="list-group-item border-end-0 border-start-0 rounded-0" 
+                                   onClick={() => handleSelectOptionTo(station)}>
+                                        {station.name}</li>)}</ul>}
                          </div>
                     </div>
                     <div className='container py-4 my-2'>
