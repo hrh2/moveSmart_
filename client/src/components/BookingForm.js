@@ -81,15 +81,15 @@ function MyForm() {
                          <h2 className='float-start text-decoration-underline'>Departure Date & Time</h2><h2 className='float-end text-decoration-underline'>Passengers</h2>
                     </div>
                     <div className="input-group my-3">
-                         <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                         <div class="form-floating border-end-0">
+                              <select class="form-select border-end-0" id="floatingSelect" aria-label="Floating label select example">
                                    <option selected>To day</option>
                                    <option value="1">Tomorrow</option>
                               </select>
                               <label for="floatingSelect">Date  <AiTwotoneCalendar size="1.3em"/></label>
                          </div>
-                         <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                         <div class="form-floating border-start-0">
+                              <select class="form-select border-start-0" id="floatingSelect" aria-label="Floating label select example">
                                    <option selected>6:00AM</option>
                                    <option value="1">8:00AM</option>
                                    <option value="1">10:00AM</option>

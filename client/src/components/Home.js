@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import SideBar from './Sidebar';
 import BookForm from './BookingForm';
+import History from './history';
 //import Test from './test';
 const Home = () => {
      return (
@@ -15,6 +16,7 @@ const Home = () => {
                <div className='Content_container col bg-white'>
                 <Navbar/>
                 <BookForm/>
+                <History/>
                </div>
           </div>
         </div>
