@@ -1,12 +1,10 @@
 import { useState, useEffect} from 'react';
 import Axios from 'axios'
 import { CgArrowsExchange } from 'react-icons/cg';
-import { AiTwotoneCalendar } from 'react-icons/ai';
+import { AiTwotoneCalendar, AiOutlineClear } from 'react-icons/ai';
 import { FaRegClock,FaUsers} from 'react-icons/fa';
 
-
 function MyForm() {
-    // const stations = [{ id: 1, name: "Kigali" }, { id: 2, name: "Musanze" }, { id: 3, name: "Rubavu" }, { id: 4, name: "Nyungwe" }, { id: 5, name: "Akagera" }];
      const [stations,setStations]=useState([]);
      const [from, setFrom] = useState({});
      const [to, setTo] = useState({});
@@ -67,16 +65,16 @@ function MyForm() {
           fetchData()
      })
      return (
-          <form className="py-lg-5">
-               <div className="form-row align-items-center container">
-                    <h2 className='text-decoration-underline'>Your Journey</h2>
+          <form className="container p-0 m-0">
+               <div className="form-row align-items-center px-5 container">
+                    <h2 className='text-decoration-underline headers'>Your Journey</h2>
                     <div className="input-group my-3">
                          <input type="text" className="form-control border-end-0 p-3" aria-label="from" placeholder="from" value={from.name} onChange={handleInputChangeFrom} required/>
-                         <button type="button" className="input-group-text border-end-0 border-start-0 px-2 bg-white" onClick={handleReverse}>
-                              <span className='Exchange-btn'><CgArrowsExchange size="3em" /></span>
+                         <button type="button" className="input-group-text border-end-0 border-start-0 p-2 bg-white" onClick={handleReverse}>
+                              <CgArrowsExchange size="3em " className='Exchange-icon' />
                          </button>
-                         <input type="text" className="form-control border-start-0 p-3" aria-label="Server" placeholder="to" value={to.name} onChange={handleInputChangeTo} required/>
-                         <button type="button" className="btn btn-danger" onClick={clearInputs}>Clear</button>
+                         <input type="text" className="form-control border-start-0 border-end-0 p-3" aria-label="Server" placeholder="to" value={to.name} onChange={handleInputChangeTo} required/>
+                         <button type="button" className="input-group-text bg-white border-start-0" onClick={clearInputs}><AiOutlineClear size="2em"/></button>
                     </div>
                     <div className="row">
                          <div className="col">
@@ -93,7 +91,7 @@ function MyForm() {
                          </div>
                     </div>
                     <div className='container py-4 my-2'>
-                         <h2 className='float-start text-decoration-underline'>Departure Date & Time</h2><h2 className='float-end text-decoration-underline'>Passengers</h2>
+                         <h2 className='float-start text-decoration-underline headers'>Departure Date & Time</h2><h2 className='float-end text-decoration-underline headers'>Passengers</h2>
                     </div>
                     <div className="input-group my-3">
                          <div class="form-floating border-end-0">
@@ -122,7 +120,7 @@ function MyForm() {
                          </div>                      
                     </div>
                     <div className=" d-flex flex-column justify-content-center align-items-center">
-                         <button type="submit" className="book-btn fw-bolder border-0 py-3 px-lg-5" disabled={!selectedStationFrom || !selectedStationTo}>CLICK TO BOOK</button>
+                         <button type="submit" className="book-btn fw-bolder border-0 py-3 px-5" disabled={!selectedStationFrom || !selectedStationTo}>CLICK TO BOOK</button>
                     </div>
                </div>
           </form>

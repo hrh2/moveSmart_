@@ -39,6 +39,8 @@
      justify-content: center;
      align-items: center;
      background-color: #010023!important;
+     padding:0 !important;
+     margin:0 !important;
 }
 .sidebar hr{
      color: #02007A;
@@ -65,10 +67,9 @@
 .book-a{
      border-top-left-radius: 0px!important;
 }
-.Exchange-btn{
+.Exchange-icon{
      border:2px solid #010023;
      border-radius: 50em;
-     box-shadow: .1em .1em .1em #010023;
 }
 .book-btn{
      border-radius: 25em!important;
@@ -83,4 +84,27 @@
 }
 .icon1{
      color:grey!important;
+}
+.Content_container{
+     max-width:100% !important;
+}
+
+
+/* Styles for screens smaller than 768px */
+@media (max-width: 767px) {
+  .headers{
+    font-size:1.1em;
+  }
+  .nav-tabs,.nav-tabs a{
+ font-size:1em;
+ background-color: #010023;
+ color:#02007A!important;
+}
+.nav-tabs a{
+ padding:1em 2em !important;
+}
+.input-group>input,button,.Exchange-icon{
+  height: 5vh;
+}
+  
 }
