@@ -4,7 +4,8 @@
 }
 ::-webkit-scrollbar {
      width: 4px !important;
-     border-radius:15%;
+     border-radius:25em;
+     height:4px;
      /* width of the scrollbar */
 }
 ::-webkit-scrollbar:hover {
@@ -13,13 +14,13 @@
 }
 
 ::-webkit-scrollbar-track {
-      border-radius:15%;
+      border-radius:25em;
      background-color: #d4d7d6 !important;
      /* color of the track */
 }
 
 ::-webkit-scrollbar-thumb {
-      border-radius:15%;
+      border-radius:25em;
      background-color: #053a58 !important;
      /* color of the thumb */
 }
@@ -76,8 +77,11 @@
      background: #010023!important;
      color: aliceblue;
 }
-.history-h1{
+.history-h1,.Chat-h1{
      border-left:.2em solid #010023;
+}
+.Chat-h1-2{
+     border-right: .2em solid #010023;
 }
 .fst-italic-p{
      color: rgb(105, 99, 99)!important;
@@ -88,12 +92,16 @@
 .Content_container{
      max-width:100% !important;
 }
+.rotate {
+     transition: transform 0.1s ease-in-out;
+}
 
-
-/* Styles for screens smaller than 768px */
+.rotate:active {
+     transform: rotate(180deg);
+}
 @media (max-width: 767px) {
   .headers{
-    font-size:1.1em;
+    font-size:1em;
   }
   .nav-tabs,.nav-tabs a{
  font-size:1em;
@@ -106,5 +114,18 @@
 .input-group>input,button,.Exchange-icon{
   height: 5vh;
 }
-  
+.Select{
+     font-size: 0.8rem;
+     width:100vw;
+}
+option{
+     font-size:0.3em;
+}
+
+.form-select:focus option{
+     border:0;
+}
+.book-btn{
+     padding: 0 0 15px 0 !important;
+}
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaHistory } from 'react-icons/fa';
 
 export default function History() {
-     const [data, setdata] = useState(true);
+     const [data, setdata] = useState(false);
 
      return (
           <div className="container">
@@ -57,7 +57,7 @@ export default function History() {
                                         <td colSpan="6">
                                              <div className="container d-flex flex-column justify-content-center align-items-center py-lg-5">
                                                   <p className="fw-light text-center fst-italic">
-                                                       <FaHistory size="3em" className="icon1" />
+                                                       <FaHistory size="2em" className="icon1 mx-2" />
                                                        <span className="text-muted">
                                                             your car booking history will be displayed here.
                                                        </span>
