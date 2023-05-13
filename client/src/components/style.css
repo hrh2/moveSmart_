@@ -97,13 +97,19 @@
 }
 
 .rotate:active {
-     transform: rotate(180deg);
+     transform: rotate(90deg);
+}
+.form-select option {
+     padding-left: 1em;
+     background-size: 2em;
+     background-repeat: no-repeat;
+     background-position: center left;
 }
 @media (max-width: 767px) {
   .headers{
     font-size:1em;
   }
-  .nav-tabs,.nav-tabs a{
+.nav-tabs,.nav-tabs a{
  font-size:1em;
  background-color: #010023;
  color:#02007A!important;
@@ -128,7 +134,22 @@ option{
 .book-btn{
      padding: 0 0 15px 0 !important;
 }
+.Chat-h1,.Chat-h1-2{
+     font-size:.9rem;
+}
 }
 .Logo{
      width:7em;
+}
+.feedback-input{
+     height:15vh!important;
+     border-radius:10em !important;
+}
+.message-input{
+     height:15vh!important;
+     border-radius:2em!important;
+}
+.a{
+     color:#010023 !important;
+     font-size: 1.3em;
 }

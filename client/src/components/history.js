@@ -11,24 +11,12 @@ export default function History() {
                     <table className="table table-hover">
                          <thead>
                               <tr className="fw-border">
-                                   <th scope="col">
-                                        <h4>Ticket No</h4>
-                                   </th>
-                                   <th scope="col">
-                                        <h4>From</h4>
-                                   </th>
-                                   <th scope="col">
-                                        <h4>To</h4>
-                                   </th>
-                                   <th scope="col">
-                                        <h4>Date</h4>
-                                   </th>
-                                   <th scope="col">
-                                        <h4>Time</h4>
-                                   </th>
-                                   <th scope="col">
-                                        <h4>Amount</h4>
-                                   </th>
+                                   <th scope="col"><h4>Ticket No</h4></th>
+                                   <th scope="col"><h4>From</h4></th>
+                                   <th scope="col"><h4>To</h4></th>
+                                   <th scope="col"><h4>Date</h4></th>
+                                   <th scope="col"><h4>Time</h4></th>
+                                   <th scope="col"><h4>Amount</h4></th>
                               </tr>
                          </thead>
                          {data && (
