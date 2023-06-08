@@ -4,6 +4,7 @@ import 'bootstrap';
 import SideBar from './gen_Sidebar';
 import { HiMenu } from 'react-icons/hi';
 import { Outlet, useLocation } from "react-router-dom";
+import Footer from '../layout/Footer'
 
 const Home = () => {
      const [showSidebar, setShowSidebar] = useState(false);
@@ -20,9 +21,9 @@ const Home = () => {
                     <SideBar />
                </div>
                <div className="Main col-md-10 container-fluid p-0 m-0">
-                    <div className="nav container-Fluid nav-tabs p-0 m-0">
-                         <span className={`nav-item book-a fw-bolder border-0 ${currentPath === '/' ? 'active' : ''}`}>
-                             {currentPath === '/' ? 'Home' :currentPath}
+                    <div className="nav container-Fluid border-0 nav-tabs p-0 m-0">
+                         <span className={`locator nav-item py-4 px-5 bg-white book-a fw-bolder border-0 ${currentPath === '/' ? 'active' : ''}`}>
+                             {currentPath === '/' ? 'Home' :currentPath.substring(1)}
                          </span>
                          <span className="Menu-btn nav-item d-md-none ms-auto px-2 px-md-5">
                               <HiMenu size="2em" className="text-white" onClick={toggleSidebar} />
@@ -40,6 +41,7 @@ const Home = () => {
                          <SideBar />
                     </div>
                )}
+               <Footer/>
           </div>
      );
 };
