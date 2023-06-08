@@ -33,7 +33,7 @@
      padding: 0 !important;
      margin: 0 !important;
 }
-.sidebar {
+.sidebarGen,.sidebarPr {
      width: 100% !important;
      display: flex;
      flex-direction: column;
@@ -43,20 +43,18 @@
      padding:0 !important;
      margin:0 !important;
 }
-.sidebar hr{
+.sidebarGen hr{
      color: #02007A;
      border-top:3px solid #02007A;
 }
-
-
-.sidebar a{
+.sidebarGen a{
      border-radius:3em;
      width: 80%;
 }
-.sidebar a:hover{
+.sidebarGen a:hover{
    background-color:#06389A;
 }
-.siidebar a.active{
+.sidebarGen a:active{
   background-color: #06389A;
 }
 .nav-tabs,.nav-tabs a{
@@ -66,6 +64,9 @@
 }
 .nav-tabs a{
  padding:1em 3em !important;
+}
+.locator{
+     border-radius: 0 2em 0 0 !important;
 }
 .book-a{
      border-top-left-radius: 0px!important;
@@ -159,4 +160,8 @@ option{
 .Chat-h1,.Chat-h1-2{
      font-size:.9rem;
 }
+/*.Footer>div{
+   display: block!important;
+   width: 100% !important;
+}*/
 }
