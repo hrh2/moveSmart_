@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import { Link } from 'react-router-dom';
-import logo1 from './img/logo (2).png'
+import logo1 from '../img/logo.png'
 
 export default function SideBar() {
      return (

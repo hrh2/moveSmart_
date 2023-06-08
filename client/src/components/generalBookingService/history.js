@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaHistory } from 'react-icons/fa';
 
 export default function History() {
+     // eslint-disable-next-line no-unused-vars
      const [data, setdata] = useState(false);
 
      return (

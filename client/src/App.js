@@ -1,20 +1,23 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import {
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-import Login from './components/Login';
-import Signup from './components/Signup';
-import BookForm from './components/BookingForm'
-import Home from './components/Home';
-import ContactUs from './components/ContactUs';
+import Login from './components/auth-authentication/Login';
+import Signup from './components/auth-authentication/Signup';
+import BookForm from './components/generalBookingService/BookingForm'
+import HomeGen from './components/layout/gen_Home';
+import ContactUs from './components/chats-communication/ContactUs';
+import HomePri from './components/privateBookingService/pr_home'
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const user = localStorage.getItem("token");
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
+      <Route path="/" element={<HomeGen />}>
         <Route index element={<BookForm />} />
         <Route path="/ContactUs" element={<ContactUs/>} />
       </Route>

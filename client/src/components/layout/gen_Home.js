@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import SideBar from './Sidebar';
+import SideBar from './gen_Sidebar';
 import { HiMenu } from 'react-icons/hi';
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -15,17 +15,14 @@ const Home = () => {
      const currentPath = location.pathname;
 
      return (
-          <div className="container-fluid row m-0 p-0">
+          <div className="container-fluid row m-0 p-0 ">
                <div className="col-md-2 container-fluid p-0 m-0 d-none d-md-block">
                     <SideBar />
                </div>
                <div className="Main col-md-10 container-fluid p-0 m-0">
                     <div className="nav container-Fluid nav-tabs p-0 m-0">
-                         <span className="nav-item">
-                              <a className={`book-a nav-link fw-bolder border-0 ${currentPath === '/' ? 'active' : ''} text-truncate`}
-                                   aria-current="page"
-                                   href="/"
-                              >Book a car</a>
+                         <span className={`nav-item book-a fw-bolder border-0 ${currentPath === '/' ? 'active' : ''}`}>
+                             {currentPath === '/' ? 'Home' :currentPath}
                          </span>
                          <span className="Menu-btn nav-item d-md-none ms-auto px-2 px-md-5">
                               <HiMenu size="2em" className="text-white" onClick={toggleSidebar} />

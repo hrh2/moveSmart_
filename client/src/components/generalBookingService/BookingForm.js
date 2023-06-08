@@ -4,6 +4,8 @@ import { CgArrowsExchange } from 'react-icons/cg';
 import { AiTwotoneCalendar} from 'react-icons/ai';
 import { FaRegClock,FaUsers} from 'react-icons/fa';
 import History from './history';
+import '../style.css';
+
 
 function MyForm() {
      const [stations,setStations]=useState([]);

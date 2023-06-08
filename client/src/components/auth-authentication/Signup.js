@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { TbLanguage } from "react-icons/tb"
 import Axios from "axios";
 import 'bootstrap'
-import './style.css'
+import '../style.css'
 
 const Signup = () => {
      // const [file, setFile] = useState(null);

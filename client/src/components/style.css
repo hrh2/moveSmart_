@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 *{
      padding: 0;
      margin: 0;
@@ -6,28 +10,24 @@
      width: 4px !important;
      border-radius:25em;
      height:4px;
-     /* width of the scrollbar */
 }
 ::-webkit-scrollbar:hover {
      width: 10px !important;
-     /* width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
       border-radius:25em;
      background-color: #d4d7d6 !important;
-     /* color of the track */
+
 }
 
 ::-webkit-scrollbar-thumb {
       border-radius:25em;
      background-color: #053a58 !important;
-     /* color of the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
      background-color: #c3eaf3 !important;
-     /* color of the thumb on hover */
 }
 .SideBar_container ,.Content_container{
      padding: 0 !important;
@@ -47,6 +47,8 @@
      color: #02007A;
      border-top:3px solid #02007A;
 }
+
+
 .sidebar a{
      border-radius:3em;
      width: 80%;
@@ -67,6 +69,10 @@
 }
 .book-a{
      border-top-left-radius: 0px!important;
+}
+.book-a:active{
+  background-color: #010023;
+  color: #010023 !important;
 }
 .Exchange-icon{
      border:2px solid #010023;
@@ -105,6 +111,22 @@
      background-repeat: no-repeat;
      background-position: center left;
 }
+
+.Logo{
+     width:7em;
+}
+.feedback-input{
+     height:15vh!important;
+     border-radius:10em !important;
+}
+.message-input{
+     height:15vh!important;
+     border-radius:2em!important;
+}
+.a{
+     color:#010023 !important;
+     font-size: 1.3em;
+}
 @media (max-width: 767px) {
   .headers{
     font-size:1em;
@@ -137,19 +159,4 @@ option{
 .Chat-h1,.Chat-h1-2{
      font-size:.9rem;
 }
-}
-.Logo{
-     width:7em;
-}
-.feedback-input{
-     height:15vh!important;
-     border-radius:10em !important;
-}
-.message-input{
-     height:15vh!important;
-     border-radius:2em!important;
-}
-.a{
-     color:#010023 !important;
-     font-size: 1.3em;
 }
