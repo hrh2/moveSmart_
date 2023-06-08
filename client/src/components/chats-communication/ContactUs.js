@@ -1,5 +1,4 @@
 import React from 'react'
-import '../style.css'
 import Questions from './questions'
 import Feedback from './feedback'
 import { FaRegUserCircle } from 'react-icons/fa';
