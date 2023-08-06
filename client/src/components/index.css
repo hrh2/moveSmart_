@@ -7,9 +7,9 @@
      margin: 0;
 }
 ::-webkit-scrollbar {
-     width: 4px !important;
+     width: 0px !important;
      border-radius:25em;
-     height:4px;
+     height:0px;
 }
 ::-webkit-scrollbar:hover {
      width: 10px !important;

@@ -3,8 +3,8 @@ import { AiOutlineLike } from 'react-icons/ai'
 import { AiOutlineDislike } from 'react-icons/ai'
 export default function Feedback() {
   return (
-       <div className='container ' style={{ position: 'relative' }}>
-            <h1 className='Chat-h1 px-1'>Feedback and reviews</h1>
+       <div className='w-5/6 mx-auto ' style={{ position: 'relative' }}>
+            <h1 className='border-l-4 px-1 md:text-sm sm:text-xs text-[.6em] font-extrabold'>Feedback and reviews</h1>
             <form class=" my-3">
                  <div class="my-1" style={{ position: 'relative' }}>
                       <label for="validationTextarea" class="form-label"></label>
@@ -17,7 +17,7 @@ export default function Feedback() {
                            </input>
                            <button
                                 type="submit"
-                                className='px-3  py-1 border-0 book-btn'
+                                className='px-2  py-[.6em] border-0 bg-blue-950 text-white rounded-2xl'
                                 style={{ position: 'absolute', bottom: '.5em', right: '4em' }}>
                                 send
                            </button>

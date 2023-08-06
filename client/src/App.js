@@ -5,13 +5,14 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Login from './components/auth-authentication/Login';
-import Signup from './components/auth-authentication/Signup';
-import BookForm from './components/generalBookingService/BookingForm'
-import HomeGen from './components/layout/gen_Home';
-import ContactUs from './components/chats-communication/ContactUs';
-import HomePri from './components/layout/Pr_Home'
-import Profile from './components/user_profile/Main';
+import Login from './layout/auth-authentication/Login';
+import Signup from './layout/auth-authentication/Signup';
+import Home from './layout/Home/Home';
+import Booking from './layout/Home/Booking'
+import CarRental from './layout/Home/CarRental';
+import ContactUs from './layout/chats/ContactUs';
+import Profile from './layout/user_profile/Main';
+import PBook from './layout/private/main'
 import '../src/components/index.css'
 import'./index.css'
 
@@ -20,14 +21,15 @@ function App() {
   const user = localStorage.getItem("token");
   return (
     <Routes>
-      <Route path="/" element={<HomeGen />}>
-        <Route index element={<BookForm />} />
-        <Route path="/ContactUs" element={<ContactUs/>} />
+      <Route path="/" element={<Home />}>
+        <Route index element={<Booking/>} />
+        <Route path="/carRental" element={<CarRental/>} />
+        <Route path="/rentCar" element={<PBook/>} />
       </Route>
+      <Route path="/ContactUs" element={<ContactUs />} />
       <Route path="/signup" exact element={<Signup />} />
       <Route path="/login" exact element={<Login />} />
       <Route path="/userProfile" exact element={<Profile />} />
-      <Route path='/privateBooking' exact element={<HomePri/>}/>
       <Route path="/" element={<Navigate replace to="/login" />} />
     </Routes>
   );
