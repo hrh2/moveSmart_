@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
-// const { User } = require('../Models/user')
 const Station=require('../Models/stations')
 
 

@@ -44,9 +44,9 @@ export default function History() {
                               <tbody>
                                    <tr>
                                         <td colSpan="6">
-                                             <div className="container d-flex flex-column justify-content-center align-items-center py-lg-5">
-                                                  <p className="fw-light text-center fst-italic">
-                                                       <FaHistory size="2em" className="icon1 mx-2" />
+                                             <div className="w-4/5 flex flex-column justify-content-center align-items-center py-5">
+                                                  <p className=" font-extralight text-center italic">
+                                                       <FaHistory size={20} />
                                                        <span className="text-muted">
                                                             your car booking history will be displayed here.
                                                        </span>

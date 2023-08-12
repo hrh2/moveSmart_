@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert} from 'react-bootstrap';
+import { Form, Alert} from 'react-bootstrap';
 import Axios from 'axios';
 import{TbLanguage}from 'react-icons/tb'
+import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
      const [data, setData] = useState({
@@ -18,9 +19,8 @@ const Login = () => {
 
      const handleSubmit = async (event) => {
           event.preventDefault(); // prevent the default form submission behavior
-
           try {
-               const response = await Axios.post('http://localhost:3005/api/login', data);
+               const response = await Axios.post('http://localhost:3050/api/login', data);
                const token = response.data.token;
                localStorage.setItem('token', token);
                // console.log(token);
@@ -37,15 +37,13 @@ const Login = () => {
      };
 
      return (
-
-          <div className="container-fluid  vh-100 w-100 ">
-               <div className='row h-100'>
-               <div className="col rightdiv">
+          <div className='w-full min-h-screen grid md:grid-cols-12 sm:grid-cols-12 grid-cols-1'>
+               <div className="md:col-span-5 sm:col-span-6">
                     <div class="btn-group position-absolute top-0 start-0">
                          <button type="button" class="btn  dropdown-toggle btn1" data-bs-toggle="dropdown" aria-expanded="false">
                               <TbLanguage size='1.2em' className="lang" />
                          </button>
-                         <ul class="dropdown-menu">
+                         <ul class="dropdown-menu text-[.6rem]">
                               <li><a class="dropdown-item" href="hrh">English(US)</a></li>
                               <li><a class="dropdown-item" href="hrh">English(UK)</a></li>
                               <li><a class="dropdown-item" href="hrh">French</a></li>
@@ -79,23 +77,20 @@ const Login = () => {
 
                               </Form.Group>
                               <div className='row justify-content-center'>
-                                   <Button variant="primary" type="submit" className="w-50 mt-4">
+                                   <button type="submit" className="w-50 mt-4 rounded-lg p-2 bg-primary">
                                         Login
-                                   </Button>
+                                   </button>
                               </div>
 
                          </Form>
-
-                         {/* <button type="button" class="btn btn-outline-secondary btn-sm mt-2 mx-auto">continue with <FcGoogle /></button> */}
-
+                         <button type="button" class="flex justify-center items-center gap-2 mt-2 mx-auto p-2 px-4 bg-slate-400 rounded-3xl"><FcGoogle size={18} />continue with</button>
                          <p>New to MoveSmart  <a href="/signup" class="link-info">Sign up</a></p>
                     </div>
+                    {error && <Alert variant="danger" className=' absolute bottom-2'>{error}</Alert>}
                </div>
-                    {error && <Alert variant="danger">{error}</Alert>}
-               <div className="col-sm-7 bg-danger rounded-end rounded-5 leftdiv2">
+               <div className="md:col-span-7 sm:col-span-6  bg-blue-950 SignUp_divisions rounded-l-3xl">
                </div>
                </div>
-          </div>         
      );
 };
 

@@ -59,3 +59,9 @@ code {
   padding: 0 !important;
   margin: 0 !important;
 }
+
+@media(max-width:640px){
+.SignUp_divisions{
+   display: none;
+}
+}

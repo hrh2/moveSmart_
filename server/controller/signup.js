@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const { User, validate } = require('../Models/user');
 const bcrypt = require('bcrypt');
+const jwt=require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
      try {
           const { error } = validate(req.body);
           if (error) {
-               return res.status(400).json({ error: error.details[0].message });
+               return res.status(400).json({ error: error.details[0].message,m:"me too idk" });
           }
           const Euser = await User.findOne({ email: req.body.email });
           if (Euser) {
@@ -19,20 +20,11 @@ router.post('/', async (req, res) => {
                lastName: req.body.lastName,
                email: req.body.email,
                phone: req.body.phone,
+               cardNumber: req.body.cardNumber,
                username: req.body.username,
                password: hash,
                image: req.body.image,
-               account: {
-                    money: 0,
-                    dateUpdated: Date.now(),
-                    used: 0,
-                    balance: 0,
-               },
-               lastTask: {
-                    destination: '',
-                    departed: '',
-                    date: Date.now(),
-               },
+               isVerified:false,
           });
           await user.save();
           const token = jwt.sign({ _id: user._id, email: user.email, phone: user.phone }, process.env.JWT);

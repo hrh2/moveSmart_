@@ -12,13 +12,14 @@ connection()
 //routes
 
 const userRoutes = require('./controller/signup');
-;
 const loginRoutes = require('./controller/login');
-const accountRoutes = require('./controller/account');
-const stationUpdateRoutes = require('./controller/stations');
-const chatbot=require('./controller/chatbot');
-const bookings = require('./controller/booking');
-const records=require('./controller/records');
+const homepageRoute=require('./controller/home');
+
+// const accountRoutes = require('./controller/account');
+// const stationUpdateRoutes = require('./controller/stations');
+// const chatbot=require('./controller/chatbot');
+// const bookings = require('./controller/booking');
+// const records=require('./controller/records');
 
 
 app.use(bodyParser.json({ limit: '3mb' }));
@@ -31,11 +32,13 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/api/user',userRoutes);
 app.use('/api/login',loginRoutes);
-app.use('/api',accountRoutes);
-app.use('/api/book',stationUpdateRoutes);
-app.use('/api/chatbot',chatbot)
-app.use('/api/bookSpace',bookings);
-app.use('/api/records',records);
+app.use('/api/home',homepageRoute);
+
+// app.use('/api',accountRoutes);
+// app.use('/api/book',stationUpdateRoutes);
+// app.use('/api/chatbot',chatbot)
+// app.use('/api/bookSpace',bookings);
+// app.use('/api/records',records);
 
 
 

@@ -10,23 +10,10 @@ const userSchema = new mongoose.Schema({
      email: { type: String, required: true },
      phone: { type: Number, required: true },
      username: { type: String, required: true },
+     cardNumber: { type:String, required: true },
      password: { type: String, required: true },
      image:{type:String,required:false},
-     account: {
-          money: { type: Number, default: 0 },
-          dateUpdated: { type: Date, default: Date.now },
-          used: { type: Number, default: 0 },
-          balance: { type: Number, dateOnly: true, default: 0 },
-     },
-     lastTask: [{
-          destination: { type: String, required:false},
-          departed: { type: String, required: false },
-          cost: { type: Number, required:false},
-          car: { type: String, required: false },
-          date: { type: Date,default: Date.now },
-          isTicket: { type: Boolean, default:false,required:false},
-          qrCode:{type:String, required:false},
-     }]
+     isVerified: { type:Boolean,default:false},
 });
 
 
@@ -40,6 +27,7 @@ const validate = (data) => {
           lastName: joi.string().required().label('Last Name'),
           email: joi.string().email().required().label('Email'),
           phone: joi.number().required().label('Phone Number'),
+          cardNumber: joi.string().required().label('cardNumber'),
           username: joi.string().required().label('Username'),
           password: passwordComplexity().required().label('Password'),
           image: joi.allow(null).label('Image'),

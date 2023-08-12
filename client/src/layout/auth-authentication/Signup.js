@@ -1,6 +1,6 @@
 import React,{ useState } from "react";
-import { Form, Alert,Image } from "react-bootstrap";
-import { FcGoogle } from "react-icons/fc";
+import { Form, Alert } from "react-bootstrap";
+import { FcGoogle} from "react-icons/fc";
 import { TbLanguage } from "react-icons/tb"
 import Axios from "axios";
 import 'bootstrap'
@@ -12,6 +12,7 @@ const Signup = () => {
           lastName: '',
           email: '',
           phone:null,
+          cardNumber:'',
           username: '',
           password: '',
           image:null
@@ -26,7 +27,7 @@ const Signup = () => {
      const handleSubmit = async (e) => {
           e.preventDefault();
           try {
-               const response = await Axios.post('http://localhost:3005/api/user', data);
+               const response = await Axios.post('http://localhost:3050/api/user', data);
                const token = response.data.token;
                localStorage.setItem('token', token);
                Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -61,6 +62,7 @@ const Signup = () => {
                firstName: '',
                lastName: '',
                email: '',
+               cardNumber:'',
                phone: null,
                username: '',
                password: '',
@@ -74,11 +76,11 @@ const Signup = () => {
 
 
      return (
-        <div className="container-fluid row">
-               <div className="col-sm-7 bg-danger rounded-start rounded-5 leftdiv1">
-               
-          </div>
-               <div className="col rightdiv">
+          <div className="w-full min-h-screen grid md:grid-cols-12 sm:grid-cols-12 grid-cols-1">
+               <div className=" md:col-span-7 sm:col-span-6  bg-blue-950 SignUp_divisions rounded-r-3xl">
+                    
+               </div>
+               <div className=" md:col-span-5 sm:col-span-6 h-screen overflow-y-scroll">
                     <div class="btn-group position-absolute top-0 end-0">
                          <button type="button" class="btn  dropdown-toggle btn1" data-bs-toggle="dropdown" aria-expanded="false">
                               <TbLanguage size='1.2em' className="lang" />
@@ -91,11 +93,14 @@ const Signup = () => {
                          </ul>
                     </div>
                     <div className="p-5 text-center">
-                         <h1>Sign Up</h1>
+                         <h1 className="font-bold text-lg">Sign Up</h1>
                          {error && <Alert variant="danger">{error}</Alert>}
-                         <div class="">
-                                        {image === "" || image === null ? "" : <Image src={image} width={100} height={100} roundedCircle fluid />} 
-                                   </div>
+                         <div 
+                         class=" w-[3rem] aspect-square bg-center bg-cover rounded-full mx-auto" 
+                          style={
+                              // image===""||image===null?"":
+                              {backgroundImage:`url(${image})`}} >
+                         </div>
                          <Form onSubmit={handleSubmit} onReset={handleReset}>
                               <Form.Group controlId="firstName">
 
@@ -133,12 +138,23 @@ const Signup = () => {
                               </Form.Group>
                               <Form.Group controlId="phone">
                                    <Form.Control
-                                        type="tel"
+                                        type="number"
                                         name="phone"
                                         value={data.phone}
                                         onChange={handleChange}
                                         className="border-0 border-bottom rounded-0 no-outline pt-4"
                                         placeholder="Phone Number"
+                                        required
+                                   />
+                              </Form.Group>
+                              <Form.Group controlId="cardNumber">
+                                   <Form.Control
+                                        type="text"
+                                        name="cardNumber"
+                                        value={data.cardNumber}
+                                        onChange={handleChange}
+                                        className="border-0 border-bottom rounded-0 no-outline pt-4"
+                                        placeholder="card Number"
                                         required
                                    />
                               </Form.Group>
@@ -168,12 +184,12 @@ const Signup = () => {
                                    <label for="profile-pic" class="form-label">Your Profile Picture</label>
                                    <input class="form-control" type="file" accept="image/" id="profile-pic" onChange={convertToBase64}></input>
                               </div>
-                              <div class="btn-group mt-3" role="group" aria-label="Basic example">
-                                   <button variant="primary" type="submit" class="btn btn-primary">Sign Up</button>
-                                   <button variant="secondary" type="reset" class="btn btn-outline-secondary">reset</button>
+                              <div class=" grid grid-flow-row gap-2">
+                                   <button variant="secondary" type="reset" class="">reset</button>
+                                   <button variant="primary" type="submit" class="bg-primary rounded-xl p-2 w-1/3 mx-auto">Sign Up</button>
                               </div>
                          </Form>
-                         <button type="button" class="btn btn-outline-secondary btn-sm mt-2 mx-auto">continue with <FcGoogle/></button>
+                         <button type="button" class="flex justify-center items-center gap-2 mt-2 mx-auto p-2 px-4 bg-slate-400 rounded-3xl"><FcGoogle size={18} />continue with</button>
                          <p>Have an Account? <a href="/login" class="link-info">log in</a></p>
                    </div>
                </div>

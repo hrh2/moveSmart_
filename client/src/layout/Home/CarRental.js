@@ -3,7 +3,6 @@ import SideBar from '../../components/Sidebar2'
 import Navbar from '../../components/Navbar2'
 import CarCard from '../../components/subcomponents/CarCard'
 import Footer from '../../components/Footer'
-import Notification from '../../components/Notification'
 
 export default function CarRental() {
   return (

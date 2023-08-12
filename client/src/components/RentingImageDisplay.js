@@ -1,37 +1,51 @@
-import React from 'react'
+import React from 'react';
+import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
-
-import Image from '../img/prof.jpg'
-
+import Image from '../img/prof.jpg';
 
 const data = [
-
     {
-
-        review: 'lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor sit amet lore mauris   sed diam non pro id el met     else temp id elit lore mauris sed diam non pro id'
+        review: 'lorem ipsum...',
     },
     {
-        
-        review: 'lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor sit amet lore mauris   sed diam non pro id el met     else temp id elit lore mauris sed diam non pro id'
+        review: 'lorem ipsum...',
     },
     {
-        review: 'lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor sit amet lore mauris   sed diam non pro id el met     else temp id elit lore mauris sed diam non pro id'
-    }
-   
-]
+        review: 'lorem ipsum...',
+    },
+    {
+        review: 'lorem ipsum...',
+    },
+    {
+        review: 'lorem ipsum...',
+    },
+];
+
 export default function Images() {
-  return (
-      <div className='w-full gap-2 overflow-x-scroll grid grid-flow-col p-2'>
-          {
-              data.map(({ avatar, name, review }, index) => {
-                  return (
-                      <div key={index} className='md:w-[35rem] md:h-[25rem] sm:w-[25rem] sm:aspect-square w-[20rem] h-[20rem] rounded-xl'>
-                          <div className='w-full h-full bg-cover bg-center rounded-xl' style={{backgroundImage:`url(${Image})`}}>
-                          </div>
-                      </div>
-                  );
-              })
-          }
-      </div>
-  )
+    return (
+        <Swiper
+            className=' gap-1 p-3'
+            modules={[Navigation,Pagination]}//hope
+            spaceBetween={40}
+            slidesPreView={3}
+            navigation
+        >
+            {data.map(({ review }, index) => (
+                <SwiperSlide
+                    key={index}
+                    className='aspect-square w-[20rem!important] bg-cover bg-center rounded-xl'
+                    style={{
+                        backgroundImage: `url(${Image})`,
+                        transform: index === 0 ? 'scale(1)' : 'scale(0.8)', // Adjust scaling factor
+                    }}
+                >
+                </SwiperSlide>
+            ))}
+        </Swiper>
+
+    );
 }
