@@ -182,7 +182,7 @@ const Signup = () => {
                               </Form.Group>
                               <div class="mb-3">
                                    <label for="profile-pic" class="form-label">Your Profile Picture</label>
-                                   <input class="form-control" type="file" accept="image/" id="profile-pic" onChange={convertToBase64}></input>
+                                   <input class="form-control" type="file" accept="image/" id="profile-pic"  onChange={convertToBase64}></input>
                               </div>
                               <div class=" grid grid-flow-row gap-2">
                                    <button variant="secondary" type="reset" class="">reset</button>

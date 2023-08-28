@@ -15,32 +15,20 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',verifyToken,async (req, res) => {
-     const { name, location, destination } = req.body;
      try {
+          const { name, commonName, location, stationDescription, imageOne } = req.body;
           const station = await Station.findOne({ name })
-          if (station) {
-               const destinations = station.destination.find(dest => dest.name == destination.name);
-               if (destinations){
-                      for (let i = 0; i < destination.cars.length; i++) {
-                         let car = destinations.cars.find(car => car.name == destination.cars[i].name);
-                            if (car) {
-                              continue;
-                            }else{
-                              destinations.cars.push(destination.cars[i])
-                              }
-                         }
-                      await station.save()
-                      res.status(200).send({ message: `Some cars  have been added successfully in ${destination} the current state is ${station}` })
-                     }else{
-               station.destination.push(destination);
-               await station.save()
-               res.status(200).send({ message: `the destinations in ${station.name} is updated` })
-               }
-          }else{
-           const newStation = new Station({name,location,destination:[destination]});
+          if(station){return res.status(400).send({msg:'station already exists'})}
+          const newStation=new Station({
+               name,
+               commonName,
+               location,
+               stationDescription,
+               images:[imageOne],
+           })
+
            await newStation.save();
-           res.json(newStation);
-          }
+           return res.status(201).json({msg:"station saved ",id:newStation._id});
      } catch (err) {
           res.status(500).send('Server error'+err.message);
      }
@@ -53,7 +41,13 @@ router.put('/:id', async (req, res) => {
      try {
           const updatedStation = await Station.findOneAndUpdate(
                { _id: req.params.id },
-               {name, location,destination },
+               {
+                    name,
+                    commonName,
+                    location,
+                    stationDescription,
+                    images,
+               },
                { new: true }
           );
 

@@ -6,7 +6,7 @@ const stationsSchema = new mongoose.Schema({
      location: {type: String,required: true},
      stationDescription: {type:String,required: true},
      images: [{ type: String }],
-     NumberOfDestinations: { type: String, default:0 },
+     numberOfDestinations: { type: String, default:0 },
      LinkedDestinationIDs: [{ type: String, required: false }],
 });
 

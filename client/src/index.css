@@ -1,60 +1,44 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+  display: flex;
+  position: relative;
 }
+
 ::-webkit-scrollbar {
-  width: 4px !important;
-  border-radius:25em;
-  height:4px;
-}
-::-webkit-scrollbar:hover {
-  width: 10px !important;
+  width: 10px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
-   border-radius:25em;
-  background-color: #d4d7d6 !important;
-
-}::-webkit-scrollbar {
-  width: 1px;
-  /* width of the scrollbar */
+  background: #e0e0e0;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #d80404;
-  /* color of the track */
-}
-
+/* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #053a58;
-  /* color of the thumb */
+  background: #888;
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #038c38;
-  /* color of the thumb on hover */
+  background: #555;
 }
 
-::-webkit-scrollbar-thumb {
-   border-radius:25em;
-  background-color: #053a58 !important;
-}
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #c3eaf3 !important;
-}
+
 .SideBar_container ,.Content_container{
   padding: 0 !important;
   margin: 0 !important;

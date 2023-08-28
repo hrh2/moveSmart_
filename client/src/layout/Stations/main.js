@@ -1,30 +1,59 @@
-import React from 'react'
+import React, { useEffect,useState} from 'react';
+import TopBar from '../../scenes/global/TopBar'
+import SideBar from '../../scenes/global/SideBar';
 // eslint-disable-next-line 
-import AddingStation from './addStation'
-import AllStations from './AllStations'
+import { useLocation,Outlet } from "react-router-dom";
+import Axios from 'axios'
 // eslint-disable-next-line 
-import AddBus from './addBus'
-import StationLinks from './StationLinks'
-import BusDetails from './BusDetails'
-import UserGraph from './UserbilityGraph'
+import AddingStation from '../../scenes/dashboard/addStation'
+// eslint-disable-next-line 
+import StationLinks from '../../scenes/dashboard/StationLinks'
+// eslint-disable-next-line 
+import BusDetails from '../../scenes/dashboard/BusDetails'
+// eslint-disable-next-line 
+import UserGraph from '../../scenes/dashboard/UserbilityGraph'
+// import Sidebar from '../../scenes/global/SideBar'
 
-export default function main() {
-  return (
-   <div className='grid grid-flow-row'>
-      <div className=''>
+
+
+export default function Main() {
+  // eslint-disable-next-line 
+  const [isSidebar, setIsSidebar] = useState(true);
+  // eslint-disable-next-line 
+  const [data, setData] = useState({})
+  // eslint-disable-next-line 
+  const [error, setError] = useState('')
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const token =localStorage.getItem("token");
+        Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
         
-      </div>
-      <div className=' bg-blue-950 min-h-screen w-full grid md:grid-cols-2 sm:grid-cols-2 grid-cols-1'>
-        <div className=''>
-          <StationLinks />
-          <BusDetails />
-          <UserGraph />
-        </div>
-        <div className='border-r-2 border-white '>
-          {/* <AddBus/> */}
-          <AllStations />
-        </div>
-      </div>
+        const response = await Axios.get('http://localhost:3050/api/station/dashboard');
+        setData(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error);
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          setError(error.response.data.message);
+        }
+      }
+    }
+    fetchData()
+  },[])
+  
+  return (
+   <div className='app'>
+    <SideBar isSidebar={isSidebar}/>
+      <main className='content'>
+      <TopBar setIsSidebar={setIsSidebar} />
+
+      <Outlet/>
+      </main>
    </div>
   )
 }

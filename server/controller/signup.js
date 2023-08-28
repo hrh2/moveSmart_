@@ -3,6 +3,7 @@ const { User, validate } = require('../Models/user');
 const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken')
 
+
 router.post('/', async (req, res) => {
      try {
           const { error } = validate(req.body);

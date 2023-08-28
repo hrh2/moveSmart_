@@ -14,9 +14,11 @@ connection()
 const userRoutes = require('./controller/signup');
 const loginRoutes = require('./controller/login');
 const homepageRoute=require('./controller/home');
+const stationRoutes = require('./controller/stations');
+const busRoutes=require('./controller/buses');
+const stationDashboardRoute=require('./controller/stationDashboard')
 
 // const accountRoutes = require('./controller/account');
-// const stationUpdateRoutes = require('./controller/stations');
 // const chatbot=require('./controller/chatbot');
 // const bookings = require('./controller/booking');
 // const records=require('./controller/records');
@@ -33,9 +35,11 @@ app.use(express.urlencoded({extended:true}));
 app.use('/api/user',userRoutes);
 app.use('/api/login',loginRoutes);
 app.use('/api/home',homepageRoute);
+app.use('/api/station/dashboard',stationDashboardRoute);
+app.use('/api/station',stationRoutes);
+app.use('/api/bus',busRoutes);
 
 // app.use('/api',accountRoutes);
-// app.use('/api/book',stationUpdateRoutes);
 // app.use('/api/chatbot',chatbot)
 // app.use('/api/bookSpace',bookings);
 // app.use('/api/records',records);
