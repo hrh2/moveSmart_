@@ -11,11 +11,16 @@ import Login from './layout/auth-authentication/Login';
 import Signup from './layout/auth-authentication/Signup';
 import Home from './layout/Home/Home';
 import Booking from './layout/Home/Booking'
-import CarRental from './layout/CarRental/Index';
+import CarRental from './layout/CarRental/main';
 import ContactUs from './layout/chats/ContactUs';
+// Use profile
 import Profile from './layout/user_profile/Main';
-import CarDetails from './layout/CarRental/CarDetails'
+// Rental Cars Services
+import Cars from './layout/CarRental/main'
+import AllCars from './layout/CarRental/index'
 import AddCar from './layout/CarRental/AddingCar'
+import SingleCar from './layout/CarRental/CarDetails'
+// Station Services
 import Station from './layout/Stations/main'
 import StationDashboard from './scenes/dashboard/index'
 import StationTable from './scenes/station/index'
@@ -37,12 +42,16 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
     <Routes>
-      {user&&<Route path="/" element={<Home />}>
+{user&&<Route path="/" element={<Home />}>
         <Route index element={<Booking/>} />
         <Route path="/carRental" element={<CarRental/>} />
-        <Route path="/carDetails" element={<CarDetails/>} />
-        <Route path="/addCar" element={<AddCar />} />
-      </Route>}
+        <Route path="/cars" exact element={<Cars/>}>
+          <Route index element={<AllCars/>} />
+          <Route path="/cars/:id" element={<SingleCar />} />
+          <Route path="/cars/add" element={<AddCar />} />
+        </Route>
+      </Route>
+      }
       <Route path="/ContactUs" element={<ContactUs />} />
       <Route path="/signup" exact element={<Signup />} />
       <Route path="/login" exact element={<Login />} />

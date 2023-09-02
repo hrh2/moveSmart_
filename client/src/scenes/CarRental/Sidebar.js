@@ -44,6 +44,7 @@ const SideBar = () => {
   return (
       <Sidebar collapsed={isCollapsed} 
                backgroundColor={colors.primary[400]}
+               className="h-full"
       >
         <Menu iconShape="circle">
           {/* LOGO AND MENU ICON */}
@@ -100,7 +101,7 @@ const SideBar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-              title="Dashboard"
+              title="View Cars"
               to="/station"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -162,32 +163,32 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Charts
+              Categories
             </Typography>
             <Item
-              title="Bar Chart"
-              to="/bar"
+              title="SUV"
+              to="#suv"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Pie Chart"
-              to="/pie"
+              title="Mini-Van"
+              to="#mini-van"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Line Chart"
-              to="/line"
+              title="Coup"
+              to="#coup"
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Geography Chart"
-              to="/geography"
+              title="Trucks"
+              to="#trucks"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

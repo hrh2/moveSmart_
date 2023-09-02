@@ -22,7 +22,6 @@ export default function Main() {
           <CarDetails />
           <Form />
           <CommentForm />
-          <Footer />
       </main>
    </div>
   )
