@@ -2,24 +2,64 @@ import React,{useState} from 'react'
 import Axios from 'axios'
 import { Box,useTheme } from "@mui/material";
 import { tokens } from "../../theme";
+import Dropzone from "react-dropzone";
+import {FaPlus} from "react-icons/fa"
 // eslint-disable-next-line 
 import { Form, Alert } from "react-bootstrap";
 
 export default function AddStation() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
     const [data, setData] = useState({
         name: '',
         commonName: '',
         location:'',
         stationDescription: '',
-        imageOne:null,
-        imageTwo:null,
-        imageThree:null,
+        images:[],
     });
-
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+    const [imageArray, setImageSrcArray] = useState([null, null, null,null]);
+    const handleDrop = (index, acceptedFiles) => {
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
+    
+        reader.onload = (event) => {
+          const updatedArray = [...imageArray];
+          updatedArray[index] = event.target.result;
+          setImageSrcArray(updatedArray);
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+      const renderImageUploader = (index) => {
+        const divStyles = {
+          backgroundImage: `url(${imageArray[index]})`,
+        };
+    
+        return (
+          <div key={index} className={`mx-auto  w-[8rem] aspect-square`} >
+            <Dropzone onDrop={(acceptedFiles) => handleDrop(index, acceptedFiles)} accept="image/*">
+              {({ getRootProps, getInputProps }) => (
+                <div
+                  {...getRootProps()}
+                  className="w-full h-full rounded-lg bg-cover bg-center bg-white text-center flex items-center"
+                  style={divStyles}
+                >
+                  <input {...getInputProps()} />
+                  {imageArray[index] ? null : (
+                    <p className="text-black text-center w-full grid grid-flow-row">
+                      <FaPlus size={25} className="mx-auto text-slate-500" />
+                    </p>
+                  )}
+                </div>
+              )}
+            </Dropzone>
+          </div>
+        );
+      };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -29,11 +69,12 @@ export default function AddStation() {
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevent the default form submission behavior
         try {
+            data.images=imageArray
             const response = await Axios.post('http://localhost:3050/api/station', data);
             setMessage(response.data.msg)
             const token=localStorage.getItem('token');
             Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-            // window.location = "/";
+             window.location = "/station/allStations";
         } catch (error) {
             console.error(error);
             if (error.response && error.response.status >= 400 && error.response.status <= 500) {
@@ -43,15 +84,7 @@ export default function AddStation() {
             }
         }
     };
-    const convertToBase64=(file)=>{
-        let reader = new FileReader();
-        reader.readAsDataURL(file.target.files[0]);
-        reader.onload = (result) => {
-            // console.log(reader.result);
-            setData({ ...data, imageOne: reader.result });
-        }
-        reader.onerror = () => { setError(reader.result); }
-    }
+    
   return (
     <Form  className='py-2' onSubmit={handleSubmit}>
       <Box className='text-center h-auto relative rounded-md py-3' m="20px" color={colors.grey[100]} backgroundColor={colors.primary[400]}>
@@ -98,11 +131,11 @@ export default function AddStation() {
                   className='w-full h-full rounded-lg bg-transparent border-2 p-1'
                   style={{borderColor:`${colors.grey[100]}`}} />
               </Box>
-              <Box class="mx-auto w-5/6 grid grid-flow-row gap-1">
-                    <label for="profile-pic" class="form-label">Station Profiles </label>
-                    <input class="form-control bg-transparent" style={{borderColor:`${colors.grey[100]}`}} type="file" name='imageOne' accept="image/" id="profile-pic" onChange={convertToBase64}></input>
-                    <input class="form-control bg-transparent" style={{borderColor:`${colors.grey[100]}`}} type="file" name='imageTwo' accept="image/" id="profile-pic" onChange={convertToBase64}></input>
-                    <input class="form-control bg-transparent" style={{borderColor:`${colors.grey[100]}`}} type="file" name='imageThree' accept="image/" id="profile-pic" onChange={convertToBase64}></input>
+              <Box className="md:flex grid grid-cols-2 gap-2">
+                    {renderImageUploader(0)} {/* Render the second image as half */}
+                    {renderImageUploader(1)} {/* Render the third image as half */}
+                    {renderImageUploader(2)} {/* Render the third image as half */}
+                    {renderImageUploader(3)} {/* Render the third image as half */}
               </Box>
               <Box className=' mx-auto w-5/6 relative my-3'>
               <label for="description" className='absolute top-[-0.5rem] left-4 px-[.1rem]'

@@ -4,10 +4,32 @@ const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
 const Station=require('../Models/stations')
 
 
-router.get('/', async (req, res) => {
+router.get('/',verifyToken, async (req, res) => {
      try {
           const stations = await Station.find();
-          res.json(stations);
+          return res.status(200).json(stations);
+     } catch (err) {
+          return res.status(500).send('Server error :'+err.message);
+     }
+});
+router.get('/linked',verifyToken,async (req,res)=>{
+     try{
+          const stations=await Station.find()
+          const linkedStations=stations.filter(station=>station.numberOfDestinations!=0)
+          return res.status(200).json(linkedStations);
+     }catch(err){
+         return res.status(500).send('Server error :'+err.message);
+     }
+})
+router.get('/:id', async (req, res) => {
+     try {
+          const station = await Station.findById(req.params.id);
+
+          if (!station) {
+               return res.status(404).json({ msg: 'Station not found' });
+          }
+
+          res.json(station);
      } catch (err) {
           console.error(err);
           res.status(500).send('Server error');
@@ -16,7 +38,7 @@ router.get('/', async (req, res) => {
 
 router.post('/',verifyToken,async (req, res) => {
      try {
-          const { name, commonName, location, stationDescription, imageOne } = req.body;
+          const { name, commonName, location, stationDescription, images } = req.body;
           const station = await Station.findOne({ name })
           if(station){return res.status(400).send({msg:'station already exists'})}
           const newStation=new Station({
@@ -24,11 +46,11 @@ router.post('/',verifyToken,async (req, res) => {
                commonName,
                location,
                stationDescription,
-               images:[imageOne],
+               images:images,
            })
-
+           newStation.id=newStation._id
            await newStation.save();
-           return res.status(201).json({msg:"station saved ",id:newStation._id});
+           return res.status(201).json({msg:"station saved ",id:newStation._id})
      } catch (err) {
           res.status(500).send('Server error'+err.message);
      }
@@ -72,21 +94,6 @@ router.delete('/:id', async (req, res) => {
           }
 
           res.json({ msg: 'Station deleted successfully' });
-     } catch (err) {
-          console.error(err);
-          res.status(500).send('Server error');
-     }
-});
-
-router.get('/:id', async (req, res) => {
-     try {
-          const station = await Station.findById(req.params.id);
-
-          if (!station) {
-               return res.status(404).json({ msg: 'Station not found' });
-          }
-
-          res.json(station);
      } catch (err) {
           console.error(err);
           res.status(500).send('Server error');

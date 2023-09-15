@@ -2,9 +2,10 @@ import { Box,useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { DataGrid,GridToolbar } from "@mui/x-data-grid";
 import { mockDataStation } from "../../data/mockData";
-import Header from "../dashboard/Header";
+import Header from "../global/Header";
 
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import Axios from 'axios'
 
 export default function Index() {
      const theme = useTheme();
@@ -12,7 +13,7 @@ export default function Index() {
     const columns=[
             { field: "id", headerName: "No" },
             {
-                field: "station",
+                field: "name",
                 headerName: "Station",
                 flex: 1,
                 cellClassName: "name-column--cell",
@@ -24,20 +25,43 @@ export default function Index() {
 
               },
               {
-                field: "noDestination",
+                field: "numberOfDestinations",
                 headerName: "No Destination",
-                type: "number",
-                headerAlign: "left",
-                align: "left",
+                flex: 1,
               },
      
     ]
+    const [data,setData]=useState({})
+    const [error, setError] = useState('')
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const token =localStorage.getItem("token");
+          Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+          
+          const response = await Axios.get('http://localhost:3050/api/station');
+          setData(response.data)
+          console.log(response.data)
+        } catch (error) {
+          console.error(error);
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+          ) {
+            setError(error.response.data.message);
+          }
+        }
+      }
+      fetchData()
+    },[])
   return (
     <Box m="20px" >
       <Header title="STATIONS" subtitle="Managing the Stations" />
       <Box
       m="40px 0 0 0"
       height="75vh"
+      className="mx-auto md:w-full sm:w-full w-[72vw] overflow-x-scroll"
       sx={{
         "& .MuiDataGrid-root": {
           border: "none",
@@ -66,7 +90,7 @@ export default function Index() {
           color: `${colors.grey[100]} !important`,
         },
       }}>
-         <DataGrid checkboxSelection rows={mockDataStation} columns={columns} components={{ Toolbar: GridToolbar }}/>
+         <DataGrid checkboxSelection rows={data} columns={columns} components={{ Toolbar: GridToolbar }} className="md:w-full sm:w-full w-[600px]"/>
       </Box>
     </Box>
   )

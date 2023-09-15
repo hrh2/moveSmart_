@@ -6,7 +6,7 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 
 export default function profile_discription() {
   return (
-    <div className='bg-indigo-950'>
+    <div className=' bg-transparent'>
       <div className='h-72'>
         
       </div>

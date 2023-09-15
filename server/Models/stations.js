@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const stationsSchema = new mongoose.Schema({
+     id:{type:String, required:true},
      name: {type: String,required: true},
      commonName: {type: String,required: true},
      location: {type: String,required: true},

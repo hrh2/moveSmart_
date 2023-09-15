@@ -3,24 +3,23 @@ import {Menu, MenuItem, Sidebar, } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
+import {PiVanFill} from "react-icons/pi"
+import {BsTruckFront} from "react-icons/bs"
+import {FaTruckPickup} from "react-icons/fa"
+import {MdNotificationsActive} from "react-icons/md"
+import {IoCarSportSharp,IoCarSportOutline} from "react-icons/io5"
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import EditIcon from '@mui/icons-material/Edit';
+import {PiCarFill} from "react-icons/pi";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import profile from '../../img/prof.jpg'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-    <Link to={to}>
+    <Link to={to} className="p-[0px!important]">
     <MenuItem
       active={selected === title}
       style={{
@@ -44,37 +43,52 @@ const SideBar = () => {
   return (
       <Sidebar collapsed={isCollapsed} 
                backgroundColor={colors.primary[400]}
-               className="h-full"
+               className=""
+               height="93vh"    
+               width="220px"
+              collapsedWidth="60px"
+               breakPoint='sm'
+               style={{
+               height: '93vh',
+              top: 'auto',
+              position: 'sticky',
+              padding: '0rem',
+              margin: '0rem',
+              collapsedWidth:"50px",
+              }}
       >
         <Menu iconShape="circle">
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            className="mx-auto"
             style={{
-              margin: "10px 0 20px 0",
               color: colors.grey[200],
+              margin:0,
             }}
           >
             {!isCollapsed && (
-              <Box
+              
+                <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                ml="15px"
-              >
+               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  Move <span className="text-yellow-500">Smart</span>
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
+              
             )}
           </MenuItem>
 
           {!isCollapsed && (
-            <Box mb="25px">
+            <Link to="/cars/profile">
+             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <Box
                   width="100px"
@@ -93,109 +107,108 @@ const SideBar = () => {
                   Ed Roh
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
                 </Typography>
               </Box>
             </Box>
+          </Link>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="View Cars"
-              to="/station"
+              to="/cars"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Typography
+            {!isCollapsed&&<Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
-            </Typography>
+            </Typography>}
             <Item
-              title="Stations"
-              to="/station/AllStations"
-              icon={<LocationOnIcon />}
+              title="My Cars"
+              to="/cars/mine"
+              icon={<IoCarSportOutline size={27} />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Buses"
-              to="/station/AllBuses"
-              icon={<DirectionsBusIcon/>}
+              title="Notifications"
+              to="/cars/notifications"
+              icon={<MdNotificationsActive size={27}/>}
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
+            {!isCollapsed&&<Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
+              width={100}
             >
-              Adding Forms 
-            </Typography>
+              Forms
+            </Typography>}
             <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
+              title="Car"
+              to="/cars/add"
+              icon={<ControlPointIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
+              title="profile"
+              to="/cars/editProfile"
+              icon={<EditIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
+            {!isCollapsed&&<Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Categories
-            </Typography>
+            </Typography>}
+            <Item
+              title="Coup"
+              to="/cars/#coup"
+              icon={<IoCarSportSharp size={27} />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="SUV"
-              to="#suv"
-              icon={<BarChartOutlinedIcon />}
+              to="/cars/#suv"
+              icon={<PiCarFill size={27}/>}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Pickup"
+              to="/cars/#pickup"
+              icon={<FaTruckPickup size={27}/>}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Mini-Van"
-              to="#mini-van"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Coup"
-              to="#coup"
-              icon={<TimelineOutlinedIcon />}
+              to="/cars/#mini-van"
+              icon={<PiVanFill size={27}/>}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Trucks"
-              to="#trucks"
-              icon={<MapOutlinedIcon />}
+              to="/cars/#trucks"
+              icon={<BsTruckFront size={27}/>}
               selected={selected}
               setSelected={setSelected}
             />
           </Box>
-        </Menu>
-        
+        </Menu>     
       </Sidebar>
   );
 };

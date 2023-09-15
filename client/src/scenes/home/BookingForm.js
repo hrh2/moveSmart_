@@ -1,11 +1,19 @@
-import { useState, useEffect } from 'react';
+// eslint-disable-next-line 
+import React,{ useState, useEffect } from 'react';
+import {Box,useTheme} from '@mui/material'
+import { tokens } from '../../theme';
+
+// eslint-disable-next-line 
 import Axios from 'axios'
 import { CgArrowsExchange } from 'react-icons/cg';
 // eslint-disable-next-line 
 import { AiTwotoneCalendar } from 'react-icons/ai';
+// eslint-disable-next-line 
 import AvailableTickets from './AvailableTickets';
 
 function MyForm() {
+     const theme = useTheme();
+     const colors = tokens(theme.palette.mode);
      const [stations, setStations] = useState([]);
      const [from, setFrom] = useState({});
      const [to, setTo] = useState({});
@@ -67,20 +75,20 @@ function MyForm() {
      // const matchingStationsTo = destination.filter((destination) =>
      //      destination.name.toLowerCase().includes(searchTermTo.toLowerCase())
      // )
-     useEffect(() => {
-          const fetchData = async () => {
-               const serverData = await Axios.get('http://localhost:3050/api/book');
-               setStations(serverData.data)
-          }
-          fetchData()
-     }, [])
+     // useEffect(() => {
+     //      const fetchData = async () => {
+     //           const serverData = await Axios.get('http://localhost:3050/api/book');
+     //           setStations(serverData.data)
+     //      }
+     //      fetchData()
+     // }, [])
      return (
-          <div className='md:w-4/6 sm:w-5/6 w-11/12 mx-auto'>
-               <form className="container p-0">
-                    <div className="items-center">
+          <Box className='md:w-4/6 sm:w-5/6 w-11/12 mx-auto px-4 rounded-lg box-shadow' backgroundColor={colors.primary[400]} >
+               <form className="">
+                    <Box className="items-center">
                          <h2 className='text-white font-bold pt-3 pb-2  px-2 text-[.5em] sm:text-[.8em] md:text-[1.245em]'>Search Ticket for Your Journey</h2>
-                         <div className='grid md:grid-flow-col gap-1 sm:grid-flow-col'>
-                              <div className="input-group  w-full h-full">
+                         <Box className='grid md:grid-flow-col gap-1 sm:grid-flow-col'>
+                              <Box className="input-group  w-full h-full">
                                    <input
                                         type="text"
                                         className="form-control border-end-0 p-3 w-full h-full"
@@ -104,8 +112,8 @@ function MyForm() {
                                         value={to.name}
                                         onChange={handleInputChangeTo}
                                         required />
-                              </div>
-                              <div className=' w-full'>
+                              </Box>
+                              <Box className=' w-full'>
                                    <input
                                         type="Date"
                                         className="form-control border-end-0 h-full p-2"
@@ -114,19 +122,19 @@ function MyForm() {
                                         value={from.name}
                                         onChange={handleInputChangeFrom}
                                         required />
-                              </div>
-                         </div>
-                         <div className="flex flex-column items-center my-3 text-white">
+                              </Box>
+                         </Box>
+                         <Box className="flex flex-column items-center my-3 text-white">
                               <button
                                    type="submit"
                                    className="border-0 bg-blue-900 px-5 py-2 rounded-3xl"
                                    disabled={!selectedStationFrom || !selectedStationTo}>Search
                               </button>
-                         </div>
-                    </div>
+                         </Box>
+                    </Box>
                </form>
-               <AvailableTickets/>
-          </div>
+               {/* <AvailableTickets/> */}
+          </Box>
      );
 
 }

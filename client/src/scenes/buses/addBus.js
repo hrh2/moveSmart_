@@ -14,7 +14,7 @@ export default function AddStation() {
         sits: '',
         time: '',
         point1:'',
-        point2: null,
+        point2:'',
     });
 
     const [error, setError] = useState('');
@@ -28,11 +28,11 @@ export default function AddStation() {
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevent the default form submission behavior
         try {
-            const response = await Axios.post('http://localhost:3050/api/bus', data);
-            setMessage(response.data.msg)
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token')
             Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-            window.location = "/station";
+            const response = await Axios.post('http://localhost:3050/api/bus', data);
+            setMessage(response.data.msg);
+            window.location = "/station/allBuses";
         } catch (error) {
             console.error(error);
             if (error.response && error.response.status >= 400 && error.response.status <= 500) {

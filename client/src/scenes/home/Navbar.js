@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { FaBus,FaCar,FaTicketAlt,FaTaxi,} from 'react-icons/fa'
-import Tickets from '../layout/Home/Tickets'
+import Tickets from '../../layout/Home/Tickets'
 
 export default function Navbar(props) {
     const [showTicketsDetails, setShowTicketsDetails] = useState(false);
@@ -11,12 +11,12 @@ export default function Navbar(props) {
   return (
     <>
     {showTicketsDetails&&<Tickets/>}
-    <div className='grid md:grid-flow-col sm:grid-flow-row grid-cols-3 gap-4 w-4/6 text-white mx-auto md:h-[4.5em] sm:h-[3em] h-2em'>
+    <div className='grid md:grid-flow-col sm:grid-flow-row grid-cols-3 gap-4 w-4/6 text-white  mx-auto md:h-[4.5em] sm:h-[3em] h-2em'>
         <a href='/' className='p-2 rounded-lg bg-blue-300 bg-opacity-40 w-16 h-full'>
-            <FaBus size={"2.5em"} className='text-blue-950 m-auto'/>
+            <FaBus size={"2.5em"} className=' m-auto'/>
             <p className='p-1 text-[.5em] text-center font-bold'>Bus</p>
         </a>
-        <a href='/' className='p-2 rounded-lg bg-blue-300 bg-opacity-40 w-16 h-full'>
+        <a href='/cabs' className='p-2 rounded-lg bg-blue-300 bg-opacity-40 w-16 h-full'>
             <FaCar size={"2.5em"} className=' m-auto'/>
             <p className='p-1 text-[.5em] text-center font-bold'>Cabs</p>
         </a>
@@ -29,7 +29,7 @@ export default function Navbar(props) {
                 <FaTaxi size={"2em"}/>
                 <span className='text-[.5em] sm:text-[.8em]'>Booking</span>
             </a>
-            <a href='/carRental' className='p-1 grid gap-2 grid-flow-col rounded-lg'>
+            <a href='/cars' className='p-1 grid gap-2 grid-flow-col rounded-lg'>
                 <FaTaxi size={"2em"}/>
                 <span className='text-[.5em] sm:text-[.8em]'>Car Rental</span>
             </a>

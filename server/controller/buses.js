@@ -13,8 +13,11 @@ router.post('/', verifyToken, async (req, res) => {
         const { plate, price, sits, time, point1, point2 } = req.body;
 
         const bus = await Buses.findOne({ plate })
+        const allBuses=await Buses.find()
+        const numberOfBuses = allBuses.length;
         if (bus) { res.status(400).send({ msg: 'bus already exists' }) }
         const newBus = new Buses({
+            id:(numberOfBuses+1+plate),
             plate,
             price,
             sits,
@@ -30,21 +33,22 @@ router.post('/', verifyToken, async (req, res) => {
         if (!station2){res.status(404).send({ msg: `Station: ${point2} not found,Not registered` })}
 
         if(station1.name == station2.name){res.status(404).send({ msg:"trying to link same station"})}
-
-        station1.numberOfDestinations++;
-            station1.LinkedDestinationIDs.push(station2._id)
-        station2.numberOfDestinations++;
-            station2.LinkedDestinationIDs.push(station1._id)
         
+        if (!station1.LinkedDestinationIDs.includes(station2._id)) {
+            station1.numberOfDestinations++;
+            station1.LinkedDestinationIDs.push(station2._id);
+            station2.numberOfDestinations++;
+            station2.LinkedDestinationIDs.push(station1._id);
+            await station1.save()
+            await station2.save()
+          }
+        newBus.id=newBus._id
         await newBus.save();
-        
-        await station1.save()
 
-        await station2.save()
-
-        res.json({ msg: "bus saved ", id: newBus._id ,linkedStation:`${station1.name} and ${station2.name}`});
+        res.json({ msg: "bus saved successful ", id: newBus._id ,linkedStation:`${station1.name} and ${station2.name}`});
 
     } catch (err) {
+        console.log(err)
         res.status(500).send('Server error' + err.message);
     }
 });

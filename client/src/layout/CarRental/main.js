@@ -2,8 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Axios from 'axios';
 import SideBar from '../../scenes/CarRental/Sidebar';
 import { Outlet } from'react-router-dom';
-
-import Footer from '../../components/Footer';
+import { Box } from '@mui/material';
 
 
 export default function Main() {
@@ -37,12 +36,13 @@ export default function Main() {
   },[])
   
   return (
-   <div className='app'>
+    <Box className=" max-w-full overflow-y-scroll"> 
+   <Box className='app '>
     <SideBar isSidebar={isSidebar}/>
-      <main className='content min-h-screen h-auto relative'>
+      <main className='content h-[93vh] overflow-y-scroll'>
         <Outlet/>
-       <Footer/>
       </main>
-   </div>
+   </Box>
+   </Box>
   )
 }

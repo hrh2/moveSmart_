@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const joi = require('joi')
 
 const busesSchema = new mongoose.Schema({
+    id:{type:String, required:true},
     plate: { type: String, required: true },
     price: { type: Number, required: true },
     sits: { type: String, required: true },

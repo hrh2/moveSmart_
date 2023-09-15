@@ -1,18 +1,18 @@
 import React, { useEffect,useState} from 'react';
-import TopBar from '../../scenes/global/TopBar'
-import SideBar from '../../scenes/global/SideBar';
+import TopBar from '../../scenes/dashboard/TopBar'
+import SideBar from '../../scenes/dashboard/SideBar';
+import Footer from '../../components/Footer'
 // eslint-disable-next-line 
 import { useLocation,Outlet } from "react-router-dom";
 import Axios from 'axios'
 // eslint-disable-next-line 
-import AddingStation from '../../scenes/dashboard/addStation'
+import AddingStation from '../../scenes/station/addStation'
 // eslint-disable-next-line 
 import StationLinks from '../../scenes/dashboard/StationLinks'
 // eslint-disable-next-line 
 import BusDetails from '../../scenes/dashboard/BusDetails'
 // eslint-disable-next-line 
 import UserGraph from '../../scenes/dashboard/UserbilityGraph'
-// import Sidebar from '../../scenes/global/SideBar'
 
 
 
@@ -47,13 +47,15 @@ export default function Main() {
   },[])
   
   return (
+    <div>
    <div className='app'>
     <SideBar isSidebar={isSidebar}/>
       <main className='content'>
       <TopBar setIsSidebar={setIsSidebar} />
-
       <Outlet/>
       </main>
+   </div>
+   <Footer/>
    </div>
   )
 }

@@ -8,7 +8,7 @@ import { SiAppstore } from 'react-icons/si';
 
 export default function Footer() {
   return (
-    <div className='w-full bg-slate-950 absolute  bottom-0'>
+    <div className='w-full bg-slate-950'>
       <div className='grid md:grid-cols-5 grid-cols-3 justify-center align-items-center'>
         <div className='py-2 text-center md:col-span-1 sm:col-span-1 col-span-3'>
           <img className='block mx-auto w-16 aspect-square rounded-full sm:mx-0 sm:shrink-0' src={logo} alt='logo' />
