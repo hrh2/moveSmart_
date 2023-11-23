@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 require('dotenv').config();
 const port = process.env.PORT || 5000;
-// const bodyParser = require('body-parser');
 const connection=require('./Models/DB');
 
 
@@ -13,36 +12,41 @@ connection()
 
 const userRoutes = require('./controller/signup');
 const loginRoutes = require('./controller/login');
+const userProfileRoutes = require('./controller/userProfile');
 const homepageRoute=require('./controller/home');
 const stationRoutes = require('./controller/stations');
 const busRoutes=require('./controller/buses');
 const stationDashboardRoute=require('./controller/stationDashboard')
+const carRentalRoutes=require('./controller/carRental')
+const VpAdminRoutes =  require('./controller/Admins')
+const cashierRoute = require('./controller/cashier')
+const bookingRoute = require('./controller/BusBooks')
+const booking = require('./controller/booking');
+const ticketsRoute = require('./controller/tickets')
+const manageTicketsRoute= require('./controller/BusBooksManagement')
 
-// const accountRoutes = require('./controller/account');
-// const chatbot=require('./controller/chatbot');
-// const bookings = require('./controller/booking');
-// const records=require('./controller/records');
 
 
-// app.use(bodyParser.json({ limit: '3mb' }));
-// app.use(bodyParser.urlencoded({ extended: true, limit: '3mb' }));
 app.use(cors())
-app.use(express.json({ limit: '3mb' }));
-app.use(express.urlencoded({extended:true,limit: '3mb' }));
+app.use(express.json({ limit: '30mb' }));
+app.use(express.urlencoded({extended:true,limit: '30mb' }));
 
 //apis
 
 app.use('/api/user',userRoutes);
 app.use('/api/login',loginRoutes);
+app.use('/api/profile',userProfileRoutes);
 app.use('/api/home',homepageRoute);
 app.use('/api/station/dashboard',stationDashboardRoute);
 app.use('/api/station',stationRoutes);
 app.use('/api/bus',busRoutes);
-
-// app.use('/api',accountRoutes);
-// app.use('/api/chatbot',chatbot)
-// app.use('/api/bookSpace',bookings);
-// app.use('/api/records',records);
+app.use('/api/car',carRentalRoutes)
+app.use('/api/vpfancyadmin/',VpAdminRoutes)
+app.use('/api/cashier',cashierRoute);
+app.use('/api/book',bookingRoute);
+app.use('/api/book',booking);
+app.use('/api/tickets',ticketsRoute);
+app.use('/api/tickets/manage',manageTicketsRoute);
 
 
 

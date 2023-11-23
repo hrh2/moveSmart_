@@ -4,7 +4,7 @@ import Axios from 'axios'
 import Header from '../../scenes/home/Header';
 import Navbar from '../../scenes/home/Navbar';
 import BookForm from '../../scenes/home/BookingForm'
-import EarnWithUs from '../../scenes/home/EarnWithUs';
+import EarnWithUs from '../../scenes/home/EarnWithUs.jsx';
 import StationDescription from '../../scenes/home/StationDescription';
 import BusOperators from '../../scenes/home/BusOperators';
 
@@ -16,21 +16,14 @@ const Home = () => {
     useEffect(() => {
       async function fetchData() {
         try {
-          const token =localStorage.getItem("token");
+          const token =localStorage.getItem("moveSmart_client_token");
           Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
           
           const response = await Axios.get('http://localhost:3050/api/home');
           setData(response.data)
         } catch (error) {
-          console.error(error);
-          if (
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status <= 500
-          ) {
             setError(error.response.data.message);
           }
-        }
       }
       fetchData()
     },[])

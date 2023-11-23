@@ -18,13 +18,13 @@ export default function ContactUs() {
         <h1 className='px-2 float-end border-r-4 md:text-sm sm:text-xs text-[.6em] font-extrabold'>Our Chatbot is ready to help</h1>
       </div>
       <div className='w-5/6 mx-auto' style={{ position: 'relative' }}>
-        <form class="was-validated my-5">
+        <form className="was-validated my-5">
           <span className=''><FaRegUserCircle size="2.5em" /> <span className='fw-bold'>User</span></span>
-          <div class="my-1" style={{ position: 'relative' }}>
-            <label for="validationTextarea" class="form-label"></label>
+          <div className="my-1" style={{ position: 'relative' }}>
+            <label htmlFor="validationTextarea" className="form-label"></label>
             <div style={{ position: 'relative' }}>
               <input 
-                class="form-control message-input" 
+                className="form-control message-input" 
               id="validationTextarea" 
               placeholder="Type the message" 
               required>

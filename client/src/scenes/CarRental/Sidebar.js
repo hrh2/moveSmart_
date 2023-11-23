@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React,{ useState,useEffect } from "react";
 import {Menu, MenuItem, Sidebar, } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { tokens } from "../../theme";
+import { tokens } from "../../Contexts/theme";
 import {PiVanFill} from "react-icons/pi"
 import {BsTruckFront} from "react-icons/bs"
 import {FaTruckPickup} from "react-icons/fa"
@@ -34,7 +34,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const SideBar = () => {
+const SideBar = ({image,name}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -94,7 +94,7 @@ const SideBar = () => {
                   width="100px"
                   height="100px"
                   className="bg-cover bg-center"
-                  style={{ cursor: "pointer", borderRadius: "50%" ,backgroundImage:`url(${profile})`}}
+                  style={{ cursor: "pointer", borderRadius: "50%" ,backgroundImage:`url(${image})`}}
                 />
               </Box>
               <Box textAlign="center">
@@ -104,7 +104,7 @@ const SideBar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh
+                  {name}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                 </Typography>

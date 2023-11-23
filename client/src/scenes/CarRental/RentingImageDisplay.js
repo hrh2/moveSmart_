@@ -2,9 +2,9 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "../../img/prof.jpg";
 
-const Images = () => {
+const Images = (props) => {
+  const {imagesArray}=props
   const settings = {
     dots: true,
     className: "center",
@@ -41,21 +41,11 @@ const Images = () => {
 
   return (
     <Slider {...settings} className="image-slider">
-      <div className="p-2">
-        <img src={Image} alt="Image1" className=" w-full aspect-square object-cover" />
-      </div>
-      <div className="p-2">
-        <img src={Image} alt="Image1" className=" w-full aspect-square object-cover" />
-      </div>
-      <div className="p-2">
-        <img src={Image} alt="Image1" className=" w-full aspect-square object-cover" />
-      </div>
-      <div className="p-2">
-        <img src={Image} alt="Image1" className=" w-full aspect-square object-cover" />
-      </div>
-      <div className="p-2">
-        <img src={Image} alt="Image1" className=" w-full aspect-square object-cover" />
-      </div>
+      {imagesArray.map((singleImage, index) => (
+     <div className="p-2" key={index}>
+        <img src={singleImage} alt={`singleImage${index + 1}`} className="w-full aspect-square object-cover" />
+     </div>
+       ))}
     </Slider>
   );
 };

@@ -1,15 +1,12 @@
 import React from "react";
-
 import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } from "recharts";
-
-import mileStaticsData from "../../data/mileStatics";
-
-const mileChart = () => {
+const mileChart = ({cars}) => {
+  console.log()
   return (
     <ResponsiveContainer width="100%">
-      <BarChart data={mileStaticsData}>
-        <XAxis dataKey="name" stroke="#2884ff" />
-        <Bar dataKey="distanceCovered" stroke="#2884ff" fill="#2884ff" barSize={30} />
+      <BarChart data={cars}>
+        <XAxis dataKey="name" stroke="#2884ff" className="text-[.5rem]"/>
+        <Bar dataKey="rate" stroke="#2884ff" fill="#2884ff" barSize={30} />
 
         <Tooltip wrapperClassName="tooltip__style" cursor={false} />
       </BarChart>

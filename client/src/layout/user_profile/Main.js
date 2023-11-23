@@ -10,20 +10,12 @@ export default function Main() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = await localStorage.getItem("token");
+        const token =await localStorage.getItem("moveSmart_client_token");
         Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
         const response = await Axios.get('http://localhost:3050/api/home');
         setData(response.data)
-        console.log(response.data)
       } catch (error) {
-        console.error(error);
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status <= 500
-        ) {
           setError(error.response.data.message);
-        }
       }
     }
     fetchData()

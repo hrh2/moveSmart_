@@ -2,28 +2,45 @@ const express = require('express');
 const router = express.Router();
 const { verifyToken, extractUserIdFromToken } = require('./tokenverify');
 const { User } = require('../Models/user')
-const Station = require('../Models/stations')
-const {Qrcode}=require('../Models/qrCodes')
+const  {Buses} = require('../Models/Buses')
+const Ticket = require('../Models/Tickets')
 
 router.post('/',verifyToken,async (req, res) => {
-     const { stationName, destName, carName } = req.body;
      try {
-          const userId=await extractUserIdFromToken(req)
-          const station = await Station.findOne({ name: stationName });
-          const destination = station.destination.find(dest => dest.name == destName);
-          const user = await User.findOne({ _id: userId })
-          user.account.balance=(user.account.money-destination.cost)
-          user.account.used = (user.account.used + destination.cost)
-          user.lastTask.push({destination:stationName,departed:destName,cost:destination.cost,car:carName,date:Date.now()})
-          const car = destination.cars.find(car => car.name ==carName);
-          car.size--;
-          await station.save();
-          await user.save();
-          console.log('all done')
-          res.status(200).json({ message: 'Car size updated' });
+          const { plate,from,to,time,cost,passengers} = req.body;
+          const ownerid = extractUserIdFromToken(req);
+          const owner=await  User.findById(ownerid);
+          const bus= await Buses.findOne({plate:plate});
+          if(!bus){
+               return res.status(404).json({message:"Couldn't find a bus"})
+          }
+          if(bus.availableSize<passengers){
+               return res.status(404).json({message:`Please try to book according to the available space\n\tThe available space is ${bus.availableSize} ${bus.plate}`});
+          }
+          const ticket = new  Ticket({
+               plate,
+               time:bus.time,
+               from,
+               to,
+               date:time,
+               code:1234,
+               cost:(passengers*cost),
+               ownerId:ownerid,
+               ownerName:owner.firstName+" "+owner.lastName,
+               stationName:from,
+               sits:passengers,
+          }) 
+          bus.availableSize=(bus.availableSize-passengers);
+          bus.allPassengers.push(ticket.ownerName);
+          if(bus.availableSize<1){
+               bus.isFull=true;
+          }
+          await bus.save();
+          await ticket.save();
+
+          return res.status(200).json({ message: `Thanks for booking using our System\n Booked ${passengers} Sits for that you will have to pay ${ticket.cost}` });
      } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: 'Server error' + error.message });
+          return res.status(500).json({ message: 'Server error ' + error.message });
      }
 });
 

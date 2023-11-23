@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../../components/Footer"
 const Home = () => {
      return (
-        <div>
+        <div className=' overflow-x-hidden'>
             <Outlet/>
             <Footer/>
         </div>

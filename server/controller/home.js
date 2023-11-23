@@ -12,7 +12,7 @@ router.get('/',verifyToken, async (req, res) => {
         const stations = await Station.find();
         const user= await User.findById(userID);
         const tickets=await Ticket.find({ownerId:userID});
-        res.json({userImage:user.image,tickets,stations});
+        res.json({userImage:user.image,name:user.lastName,tickets,stations});
     } catch (err) {
         console.error(err);
         res.status(500).send(`Server error : ${err.message}`);
